@@ -18,12 +18,10 @@
 //
 //extension RESTAPIProtocol {
 //    var baseURL: String {
-//        "https://test.ryets.com/v2/"
+//        ""
 //    }
 //    
-//    var vinAuditURL: String {
-//        "https://api.vinaudit.com/"
-//    }
+
 //}
 //
 //extension RESTAPIProtocol {

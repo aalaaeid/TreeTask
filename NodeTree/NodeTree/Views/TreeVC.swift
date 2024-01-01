@@ -10,13 +10,29 @@ import UIKit
 
 class TreeVC: UIViewController {
 
-    var tree = Tree.getAll()
+    
+    @IBOutlet weak var treeCollectionView: UICollectionView!
+    
+    var dataSource: TreeDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
         view.backgroundColor = .red
+   
+        dataSource = TreeDataSource(branchType: .root, collectionView: treeCollectionView)
+        treeCollectionView.delegate = dataSource
+        treeCollectionView.dataSource = dataSource
+        
+        treeCollectionView.register(UINib(nibName: String(describing: ChildCell.self), bundle: nil), forCellWithReuseIdentifier: String(describing: ChildCell.self))
+        
+        treeCollectionView.register(UINib(nibName: String(describing: TreeCell.self), bundle: nil),
+                                              forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                              withReuseIdentifier: String(describing: TreeCell.self))
+
+    
+        
     }
 
 
@@ -24,5 +40,7 @@ class TreeVC: UIViewController {
 }
 
 
-/// we can make horizantal stack cutom view, and each Hstack has label an button and Vstack has that HStack
-//
+
+
+
+

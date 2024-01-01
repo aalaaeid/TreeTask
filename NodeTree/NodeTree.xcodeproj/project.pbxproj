@@ -13,6 +13,11 @@
 		F10DD2762B3D85C10065FDCF /* TreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F10DD2742B3D85C10065FDCF /* TreeVC.xib */; };
 		F10DD2782B3D8A6D0065FDCF /* TreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2772B3D8A6D0065FDCF /* TreeViewModel.swift */; };
 		F10DD27A2B3D8B460065FDCF /* RemoteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2792B3D8B460065FDCF /* RemoteError.swift */; };
+		F1150E2B2B3DC33200908CB9 /* TreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1150E292B3DC33200908CB9 /* TreeCell.swift */; };
+		F1150E2C2B3DC33200908CB9 /* TreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1150E2A2B3DC33200908CB9 /* TreeCell.xib */; };
+		F18B60062B3E2B890054DDD8 /* ChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B60042B3E2B890054DDD8 /* ChildCell.swift */; };
+		F18B60072B3E2B890054DDD8 /* ChildCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F18B60052B3E2B890054DDD8 /* ChildCell.xib */; };
+		F18B600A2B3E2FEE0054DDD8 /* TreeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18B60092B3E2FEE0054DDD8 /* TreeDataSource.swift */; };
 		F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4578E2B3C5915006C50AF /* AppDelegate.swift */; };
 		F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457902B3C5915006C50AF /* SceneDelegate.swift */; };
 		F1E457982B3C5916006C50AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1E457972B3C5916006C50AF /* Assets.xcassets */; };
@@ -47,6 +52,11 @@
 		F10DD2742B3D85C10065FDCF /* TreeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TreeVC.xib; sourceTree = "<group>"; };
 		F10DD2772B3D8A6D0065FDCF /* TreeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeViewModel.swift; sourceTree = "<group>"; };
 		F10DD2792B3D8B460065FDCF /* RemoteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteError.swift; sourceTree = "<group>"; };
+		F1150E292B3DC33200908CB9 /* TreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeCell.swift; sourceTree = "<group>"; };
+		F1150E2A2B3DC33200908CB9 /* TreeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TreeCell.xib; sourceTree = "<group>"; };
+		F18B60042B3E2B890054DDD8 /* ChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCell.swift; sourceTree = "<group>"; };
+		F18B60052B3E2B890054DDD8 /* ChildCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChildCell.xib; sourceTree = "<group>"; };
+		F18B60092B3E2FEE0054DDD8 /* TreeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDataSource.swift; sourceTree = "<group>"; };
 		F1E4578B2B3C5915006C50AF /* NodeTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1E4578E2B3C5915006C50AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1E457902B3C5915006C50AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +102,14 @@
 				F10DD26F2B3D84C90065FDCF /* HomeService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F18B60082B3E2FC90054DDD8 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				F18B60092B3E2FEE0054DDD8 /* TreeDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		F1E457822B3C5915006C50AF = {
@@ -160,8 +178,13 @@
 		F1E457BF2B3C6BC5006C50AF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F18B60082B3E2FC90054DDD8 /* DataSource */,
 				F10DD2732B3D85C10065FDCF /* TreeVC.swift */,
 				F10DD2742B3D85C10065FDCF /* TreeVC.xib */,
+				F1150E292B3DC33200908CB9 /* TreeCell.swift */,
+				F1150E2A2B3DC33200908CB9 /* TreeCell.xib */,
+				F18B60042B3E2B890054DDD8 /* ChildCell.swift */,
+				F18B60052B3E2B890054DDD8 /* ChildCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -287,6 +310,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F10DD2762B3D85C10065FDCF /* TreeVC.xib in Resources */,
+				F18B60072B3E2B890054DDD8 /* ChildCell.xib in Resources */,
+				F1150E2C2B3DC33200908CB9 /* TreeCell.xib in Resources */,
 				F1E4579B2B3C5916006C50AF /* LaunchScreen.storyboard in Resources */,
 				F1E457982B3C5916006C50AF /* Assets.xcassets in Resources */,
 			);
@@ -314,11 +339,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */,
+				F18B600A2B3E2FEE0054DDD8 /* TreeDataSource.swift in Sources */,
 				F10DD2782B3D8A6D0065FDCF /* TreeViewModel.swift in Sources */,
+				F18B60062B3E2B890054DDD8 /* ChildCell.swift in Sources */,
 				F10DD27A2B3D8B460065FDCF /* RemoteError.swift in Sources */,
 				F1E457C32B3C6C0B006C50AF /* RESTAPIProtocol.swift in Sources */,
 				F10DD2752B3D85C10065FDCF /* TreeVC.swift in Sources */,
 				F10DD2722B3D84F70065FDCF /* Tree.swift in Sources */,
+				F1150E2B2B3DC33200908CB9 /* TreeCell.swift in Sources */,
 				F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */,
 				F10DD2702B3D84C90065FDCF /* HomeService.swift in Sources */,
 			);

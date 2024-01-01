@@ -12,7 +12,7 @@ import Combine
 class TreeViewModel {
     
     var bag: Set<AnyCancellable> = []
-    private var treeService = TreeService.init()
+//    private var treeService = TreeService.init()
     var viewUpdates: PassthroughSubject<ViewUpdates, Never> = .init()
 }
 
