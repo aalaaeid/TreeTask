@@ -6,100 +6,57 @@
 ////  Copyright © 2020 World Wide Technology. All rights reserved..
 ////
 //
-//import Foundation
-//import Combine
-//
-//protocol RESTAPIProtocol {
-//    typealias RequestModifier = ((URLRequest) -> URLRequest)
-//
-//    var baseURL: String { get }
-//    var urlSession: URLSession { get }
-//}
-//
-//extension RESTAPIProtocol {
-//    var baseURL: String {
-//        ""
-//    }
-//    
+import Foundation
+import Combine
 
-//}
-//
-//extension RESTAPIProtocol {
-//    var urlSession: URLSession {
-//        let configuration = URLSessionConfiguration.ephemeral
-//        let session = URLSession(configuration: configuration)
-//        return session
-//    }
-//
-//    func get(endpoint: String, url: String,
-//             queryItems: [URLQueryItem] = [],
-//             requestModifier:@escaping RequestModifier = { $0 }) -> URLSession.ErasedDataTaskPublisher {
-//
-//        guard let url = URL(string: url), var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return Fail(error: API.URLError.unableToCreateURL).eraseToAnyPublisher()}
-//        components.path = "/test/" + endpoint
-//        components.queryItems = queryItems
-//        components.scheme = "https"
-//        guard let requestUrl = components.url else {
-//            return Fail<URLSession.DataTaskPublisher.Output, Error>(error: API.URLError.wrongURLQuery(queryItems: queryItems))
-//                .eraseToAnyPublisher() }
-//
-//        let request = URLRequest(url: requestUrl)
-//        return createPublisher(for: request, requestModifier: requestModifier)
-//        
-//        
-//    }
-//
-//    func put(endpoint: String, body: Data?, requestModifier:@escaping RequestModifier = { $0 }) -> URLSession.ErasedDataTaskPublisher {
-//        guard let url = URL(string: "\(baseURL)")?.appendingPathComponent(endpoint) else {
-//            return Fail<URLSession.DataTaskPublisher.Output, Error>(error: API.URLError.unableToCreateURL).eraseToAnyPublisher()
-//        }
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "PUT"
-//        request.httpBody = body
-//        return createPublisher(for: request, requestModifier: requestModifier)
-//    }
-//
-//    func post(endpoint: String, body: Data?, requestModifier:@escaping RequestModifier = { $0 }) -> URLSession.ErasedDataTaskPublisher {
-//        guard let url = URL(string: "\(baseURL)")?.appendingPathComponent(endpoint) else {
-//            return Fail<URLSession.DataTaskPublisher.Output, Error>(error: API.URLError.unableToCreateURL).eraseToAnyPublisher()
-//        }
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        request.httpBody = body
-//        return createPublisher(for: request, requestModifier: requestModifier)
-//        
-//        
-//    }
-//
-//    func patch(endpoint: String, body: Data?, requestModifier:@escaping RequestModifier = { $0 }) -> URLSession.ErasedDataTaskPublisher {
-//        guard let url = URL(string: "\(baseURL)")?.appendingPathComponent(endpoint) else {
-//            return Fail<URLSession.DataTaskPublisher.Output, Error>(error: API.URLError.unableToCreateURL).eraseToAnyPublisher()
-//        }
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "PATCH"
-//        request.httpBody = body
-//        return createPublisher(for: request, requestModifier: requestModifier)
-//    }
-//
-//    func delete(endpoint: String, requestModifier:@escaping RequestModifier = { $0 }) -> URLSession.ErasedDataTaskPublisher {
-//        guard let url = URL(string: baseURL), var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return Fail(error: API.URLError.unableToCreateURL).eraseToAnyPublisher()}
-//        components.path = "/dev/" + endpoint
-//        components.scheme = "https"
-//        guard let requestUrl = components.url else {
-//            return Fail<URLSession.DataTaskPublisher.Output, Error>(error: API.URLError.unableToCreateURL)
-//                .eraseToAnyPublisher() }
-//
-//        var request = URLRequest(url: requestUrl)
-//        request.httpMethod = "DELETE"
-//        return createPublisher(for: request, requestModifier: requestModifier)
-//    }
-//
-//    func createPublisher(for request: URLRequest, requestModifier:@escaping RequestModifier) -> URLSession.ErasedDataTaskPublisher {
-//        Just(request)
-//            .setFailureType(to: Error.self)
-//            .flatMap { [self] in
-//                urlSession.erasedDataTaskPublisher(for: requestModifier($0))
-//            }.eraseToAnyPublisher()
-//    
-//    }
-//}
+
+
+class APIProvider<Endpoint: EndpointProtocol> {
+    func getData(from endpoint: Endpoint) -> AnyPublisher<Data, Error> {
+        guard let request = performRequest(for: endpoint) else {
+            return Fail(error: RemoteError.invalidURL)
+                .eraseToAnyPublisher()
+        }
+        
+        return loadData(with: request)
+            .eraseToAnyPublisher()
+    }
+    
+    // MARK: - Request building
+    private func performRequest(for endpoint: Endpoint) -> URLRequest? {
+        guard var urlComponents = URLComponents(string: endpoint.absoluteURL) else {
+            return nil
+        }
+
+        urlComponents.queryItems = endpoint.params.compactMap({ param -> URLQueryItem in
+            return URLQueryItem(name: param.key, value: param.value)
+        })
+
+        guard let url = urlComponents.url else {
+            return nil
+        }
+
+        var urlRequest = URLRequest(url: url,
+                                    cachePolicy: .reloadRevalidatingCacheData,
+                                    timeoutInterval: 30)
+        
+        endpoint.headers.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.key) }
+        
+        return urlRequest
+    }
+    
+    // MARK: - Getting data
+    private func loadData(with request: URLRequest) -> AnyPublisher<Data, Error> {
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .mapError({ error -> Error in
+                APIErrors(rawValue: error.code.rawValue) ?? RemoteError.unknownError
+            })
+            .map { $0.data }
+            .handleEvents(receiveSubscription: { (v) in
+                print(v)
+            }, receiveOutput: { (d) in
+                print(String(data: d, encoding: .utf8))
+            }, receiveCompletion: nil, receiveCancel: nil, receiveRequest: nil)
+            .eraseToAnyPublisher()
+    }
+}

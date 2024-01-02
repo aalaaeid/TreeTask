@@ -8,72 +8,39 @@
 import Foundation
 
 
-enum RemoteError: Error {
+enum APIErrors: Int, Error {
+    case badRequest = 400
+    case unAuthorized = 401
+    case tooManyRequests = 429
+    case serverError = 500
     
-    /// Used when the error in request != nil
-    case requestError(e: Error)
-
-    ///used when there's an error returned from the backend
-    case decodingError(e: Error)
-
-    ///used when we can't get the data from the request, data == nil
-    case dataError(message: String)
-    
-    
-    ///Used when the operation failed from backend
-    case operationError(reason: String)
-    
-    // MARK: - Internal errors
-    case noInternet
-    // MARK: - API errors
-    case badAPIRequest
-    
-    // MARK: - Auth errors
-    case unauthorized(message:String)
-    
-    // MARK: - Unknown errors
-    case unknown
-    case serverError
-    case timeout
-}
-
-
-
-extension RemoteError: LocalizedError {
-    
-    public var errorDescription: String? {
+    var errorDescription: String? {
         switch self {
-        case .noInternet:
-            return "Check Internet Connection"
-            
-        case .badAPIRequest:
-            return "Bad Api Request"
-            
-        case .unauthorized(let message):
-            return message
-            
-        case .unknown:
-            return "Unexpected Error Occured"
-            
+        case .tooManyRequests:
+            return "You made too many requests within a window of time and have been rate limited. Back off for a while."
         case .serverError:
-            return "Can not Connect to Server"
-            
-        case .timeout:
-            return "Connection Timedout"
-            
-        case .requestError(e: let error):
-            return error.localizedDescription
-            
-        case .decodingError(e: let error):
-            return error.localizedDescription
-            
-        case .dataError(message: let message):
-            return message
-            
-        case .operationError(reason: let reason):
-            return reason
-
+            return "Server error."
+        default:
+            return "Something goes wrong."
         }
     }
 }
 
+
+enum RemoteError: Error {
+    case invalidURL
+    case dataNil
+    case decodingError
+    case unknownError
+    
+    var errorDescription: String? {
+        switch self {
+        case .dataNil:
+            return "Empty data."
+        case .decodingError:
+            return "Data has invalid format."
+        default:
+            return "Something goes wrong."
+        }
+    }
+}
