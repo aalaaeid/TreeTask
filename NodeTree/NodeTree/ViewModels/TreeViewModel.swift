@@ -13,16 +13,19 @@ protocol TreeViewModelProtocl {
     func fetchNodeWith(treeID: String)
 }
 
-class TreeViewModel {
+extension TreeVC {
+    class ViewModel {
+        
+        private var treeService = TreeService.init()
+        var bag: Set<AnyCancellable> = []
+        var viewUpdates: PassthroughSubject<ViewUpdates, Never> = .init()
+    }
     
-    private var treeService = TreeService.init()
-    var bag: Set<AnyCancellable> = []
-    var viewUpdates: PassthroughSubject<ViewUpdates, Never> = .init()
+    
 }
 
-
-
-extension TreeViewModel: TreeViewModelProtocl {
+extension TreeVC.ViewModel: TreeViewModelProtocl {
+    
     func fetchRoot() {
         
         treeService.fetchTree()
@@ -45,7 +48,7 @@ extension TreeViewModel: TreeViewModelProtocl {
                 receiveValue: { [weak self] response in
                     print(response, "👻")
                     
-                    self?.viewUpdates.send(.fetchTree(tree: response.data))
+                    self?.viewUpdates.send(.fetchRoot(tree: response.data))
                     
                 }
             )
@@ -60,10 +63,10 @@ extension TreeViewModel: TreeViewModelProtocl {
 }
 
 
-extension TreeViewModel {
+extension TreeVC.ViewModel {
     enum ViewUpdates {
-        case fetchTree(tree: [Tree])
-        case fetchAllNodes(info: Tree)
+        case fetchRoot(tree: [Tree])
+        case fetchAllChilds(childs: [Tree])
         case showToastMessage(message: String)
     }
 }
