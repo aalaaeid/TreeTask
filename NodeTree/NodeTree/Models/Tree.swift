@@ -10,7 +10,7 @@ import Foundation
 
 struct Tree: Codable {
     let name: String
-    var isExpanded: Bool = false
+    var isExpanded: Bool
     var childs: Int
     let treeID: String
 }
@@ -23,14 +23,14 @@ struct Tree: Codable {
 
 extension Tree {
     static func getRoot() -> [Tree] {
-        return [Tree(name: "Root1", childs: 5, treeID:"Root1")]
+        return [Tree(name: "Root1", isExpanded: false, childs: 5, treeID:"Root1")]
                
     }
     
     static func getChildren(structID: String) -> [Tree] {
-        return [Tree(name: "Child1", childs: 5, treeID:"Child1"),
-                Tree(name: "Child2", childs: 5, treeID:"Child2"),
-                Tree(name: "Child3", childs: 5, treeID:"Child3"),
-                Tree(name: "Child4", childs: 5, treeID:"Child4")]
+        return [Tree(name: "Child1", isExpanded: false, childs: 5, treeID:"Child1"),
+                Tree(name: "Child2", isExpanded: false, childs: 5, treeID:"Child2"),
+                Tree(name: "Child3", isExpanded: false, childs: 5, treeID:"Child3"),
+                Tree(name: "Child4", isExpanded: false, childs: 5, treeID:"Child4")]
     }
 }
