@@ -16,7 +16,7 @@ protocol TreeViewModelProtocl {
 extension TreeVC {
     class ViewModel {
         
-        private var treeService = TreeService.init()
+        private var treeUseCase = TreeRepository.init()
         var bag: Set<AnyCancellable> = []
         var viewUpdates: PassthroughSubject<ViewUpdates, Never> = .init()
     }
@@ -28,7 +28,7 @@ extension TreeVC.ViewModel: TreeViewModelProtocl {
     
     func fetchRoot() {
         
-        treeService.fetchTree()
+        treeUseCase.fetchTree()
             .decode(type: RemoteResponse<[Tree]>.self, decoder: JSONDecoder.init())
             .receive(on: RunLoop.main)
             .sink(

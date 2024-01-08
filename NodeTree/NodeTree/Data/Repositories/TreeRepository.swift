@@ -10,7 +10,7 @@ import Combine
 
 
 
-protocol TreeServiceProtocol {
+protocol DefaultTreeRepository {
     /// Fetch Root Tree
     func fetchTree() -> AnyPublisher<Data, Error>
     /// Fetch all Childs of tree ID
@@ -22,7 +22,7 @@ protocol TreeServiceProtocol {
 
 
 
-struct TreeService: TreeServiceProtocol {
+struct TreeRepository: DefaultTreeRepository {
     
     private let apiProvider = APIProvider<TreeEndPoint>()
     
@@ -42,7 +42,7 @@ struct TreeService: TreeServiceProtocol {
 }
 
 
-extension TreeService {
+extension TreeRepository {
     enum WeatherServiceErrors: Error {
         case treeIDNil
         

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F10DD2702B3D84C90065FDCF /* TreeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD26F2B3D84C90065FDCF /* TreeService.swift */; };
+		F10DD2702B3D84C90065FDCF /* TreeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD26F2B3D84C90065FDCF /* TreeRepository.swift */; };
 		F10DD2722B3D84F70065FDCF /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2712B3D84F70065FDCF /* Tree.swift */; };
 		F10DD2752B3D85C10065FDCF /* TreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2732B3D85C10065FDCF /* TreeVC.swift */; };
 		F10DD2762B3D85C10065FDCF /* TreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F10DD2742B3D85C10065FDCF /* TreeVC.xib */; };
@@ -48,7 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F10DD26F2B3D84C90065FDCF /* TreeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeService.swift; sourceTree = "<group>"; };
+		F10DD26F2B3D84C90065FDCF /* TreeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeRepository.swift; sourceTree = "<group>"; };
 		F10DD2712B3D84F70065FDCF /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		F10DD2732B3D85C10065FDCF /* TreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeVC.swift; sourceTree = "<group>"; };
 		F10DD2742B3D85C10065FDCF /* TreeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TreeVC.xib; sourceTree = "<group>"; };
@@ -100,12 +100,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F10DD26E2B3D84BC0065FDCF /* Services */ = {
+		F10DD26E2B3D84BC0065FDCF /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				F10DD26F2B3D84C90065FDCF /* TreeService.swift */,
+				F10DD26F2B3D84C90065FDCF /* TreeRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		F131EE002B4BF2A600FCF499 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				F131EE012B4BFF8300FCF499 /* App */,
+				F131EE022B4BFFD100FCF499 /* Scenes */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		F131EE012B4BFF8300FCF499 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F1E4578E2B3C5915006C50AF /* AppDelegate.swift */,
+				F1E457902B3C5915006C50AF /* SceneDelegate.swift */,
+				F1E457992B3C5916006C50AF /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F131EE022B4BFFD100FCF499 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				F131EE032B4C004A00FCF499 /* NetworkScene */,
+				F131EE042B4C006800FCF499 /* TreeScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		F131EE032B4C004A00FCF499 /* NetworkScene */ = {
+			isa = PBXGroup;
+			children = (
+				F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */,
+				F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */,
+			);
+			path = NetworkScene;
+			sourceTree = "<group>";
+		};
+		F131EE042B4C006800FCF499 /* TreeScene */ = {
+			isa = PBXGroup;
+			children = (
+				F1E457BF2B3C6BC5006C50AF /* Views */,
+				F1E457C02B3C6BCC006C50AF /* ViewModels */,
+			);
+			path = TreeScene;
+			sourceTree = "<group>";
+		};
+		F131EE052B4C00AB00FCF499 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F1EBDD4F2B4401D60091E0D5 /* EndPoints */,
+				F1E457BE2B3C6BBB006C50AF /* NetworkingHelpers */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F131EE072B4C01AF00FCF499 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F10DD26E2B3D84BC0065FDCF /* Repositories */,
+				F1E457C12B3C6BDD006C50AF /* dt */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		F1E457822B3C5915006C50AF = {
@@ -131,16 +195,11 @@
 		F1E4578D2B3C5915006C50AF /* NodeTree */ = {
 			isa = PBXGroup;
 			children = (
+				F131EE052B4C00AB00FCF499 /* Services */,
 				F1EBDD542B4416B30091E0D5 /* Extension */,
-				F10DD26E2B3D84BC0065FDCF /* Services */,
-				F1E457C12B3C6BDD006C50AF /* Models */,
-				F1E457BF2B3C6BC5006C50AF /* Views */,
-				F1E457C02B3C6BCC006C50AF /* ViewModels */,
-				F1E457BE2B3C6BBB006C50AF /* NetworkingHelpers */,
-				F1E4578E2B3C5915006C50AF /* AppDelegate.swift */,
-				F1E457902B3C5915006C50AF /* SceneDelegate.swift */,
+				F131EE072B4C01AF00FCF499 /* Data */,
+				F131EE002B4BF2A600FCF499 /* Presentation */,
 				F1E457972B3C5916006C50AF /* Assets.xcassets */,
-				F1E457992B3C5916006C50AF /* LaunchScreen.storyboard */,
 				F1E4579C2B3C5916006C50AF /* Info.plist */,
 			);
 			path = NodeTree;
@@ -166,7 +225,6 @@
 		F1E457BE2B3C6BBB006C50AF /* NetworkingHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				F1EBDD4F2B4401D60091E0D5 /* EndPoints */,
 				F1E457C22B3C6C0B006C50AF /* RESTAPIProtocol.swift */,
 				F10DD2792B3D8B460065FDCF /* RemoteError.swift */,
 				F1EBDD4D2B44019B0091E0D5 /* EndPointProtocol.swift */,
@@ -179,8 +237,6 @@
 			children = (
 				F10DD2732B3D85C10065FDCF /* TreeVC.swift */,
 				F10DD2742B3D85C10065FDCF /* TreeVC.xib */,
-				F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */,
-				F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,13 +249,13 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		F1E457C12B3C6BDD006C50AF /* Models */ = {
+		F1E457C12B3C6BDD006C50AF /* dt */ = {
 			isa = PBXGroup;
 			children = (
 				F10DD2712B3D84F70065FDCF /* Tree.swift */,
 				F1EBDD522B440A4A0091E0D5 /* RemoteResponse.swift */,
 			);
-			path = Models;
+			path = dt;
 			sourceTree = "<group>";
 		};
 		F1EBDD4F2B4401D60091E0D5 /* EndPoints */ = {
@@ -363,7 +419,7 @@
 				F10DD2752B3D85C10065FDCF /* TreeVC.swift in Sources */,
 				F10DD2722B3D84F70065FDCF /* Tree.swift in Sources */,
 				F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */,
-				F10DD2702B3D84C90065FDCF /* TreeService.swift in Sources */,
+				F10DD2702B3D84C90065FDCF /* TreeRepository.swift in Sources */,
 				F1EBDD562B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
