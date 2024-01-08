@@ -41,16 +41,16 @@ let systemImages = [TreeTest(name: "name 1", image: "square.and.arrow.up"),
         let config = UICollectionLayoutListConfiguration(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         treeCollectionView.collectionViewLayout = layout
-
+        
         let cellreg = UICollectionView.CellRegistration<UICollectionViewListCell, String>() { cell, indexPath, name in
             var config = cell.defaultContentConfiguration()
             config.text = name
             cell.contentConfiguration = config
             
-            let snap = self.datasource.snapshot(for: "Groups")
-              let snap2 = snap.snapshot(of: name, includingParent: false)
-              let hasChildren = snap2.items.count > 0
-            cell.accessories = hasChildren ? [.outlineDisclosure()] : []
+              let snap = self.datasource.snapshot(for: "Groups")
+              let snapItems = snap.snapshot(of: name, includingParent: false)
+              let hasChildren = snapItems.items.count > 0
+              cell.accessories = hasChildren ? [.outlineDisclosure()] : []
         }
         self.datasource = UICollectionViewDiffableDataSource<String,String>(collectionView: treeCollectionView) { collectionView, indexPath, item in
             collectionView.dequeueConfiguredReusableCell(using: cellreg, for: indexPath, item: item)
@@ -67,7 +67,7 @@ let systemImages = [TreeTest(name: "name 1", image: "square.and.arrow.up"),
         self.datasource.apply(snap, to: "Groups", animatingDifferences: false)
 
     
-        
+ 
     }
     
     
