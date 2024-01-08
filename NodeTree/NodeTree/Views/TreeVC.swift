@@ -56,8 +56,6 @@ let systemImages = [TreeTest(name: "name 1", image: "square.and.arrow.up"),
             collectionView.dequeueConfiguredReusableCell(using: cellreg, for: indexPath, item: item)
         }
         
-        view.backgroundColor = .red
-   
         
         var snap = NSDiffableDataSourceSectionSnapshot<String>()
         snap.append(["Pep", "Marx"], to: nil) // root

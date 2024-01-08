@@ -13,6 +13,8 @@
 		F10DD2762B3D85C10065FDCF /* TreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F10DD2742B3D85C10065FDCF /* TreeVC.xib */; };
 		F10DD2782B3D8A6D0065FDCF /* TreeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2772B3D8A6D0065FDCF /* TreeViewModel.swift */; };
 		F10DD27A2B3D8B460065FDCF /* RemoteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2792B3D8B460065FDCF /* RemoteError.swift */; };
+		F131EDFE2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */; };
+		F131EDFF2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */; };
 		F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4578E2B3C5915006C50AF /* AppDelegate.swift */; };
 		F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457902B3C5915006C50AF /* SceneDelegate.swift */; };
 		F1E457982B3C5916006C50AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1E457972B3C5916006C50AF /* Assets.xcassets */; };
@@ -25,9 +27,6 @@
 		F1EBDD512B4401E90091E0D5 /* TreeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD502B4401E90091E0D5 /* TreeEndPoint.swift */; };
 		F1EBDD532B440A4A0091E0D5 /* RemoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD522B440A4A0091E0D5 /* RemoteResponse.swift */; };
 		F1EBDD562B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD552B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift */; };
-		F1EBDD592B44270B0091E0D5 /* NetworkDisconnectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD572B44270B0091E0D5 /* NetworkDisconnectedVC.swift */; };
-		F1EBDD5A2B44270B0091E0D5 /* NetworkDisconnectedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1EBDD582B44270B0091E0D5 /* NetworkDisconnectedVC.xib */; };
-		F1EBDD5C2B4440340091E0D5 /* NestedHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD5B2B4440340091E0D5 /* NestedHStack.swift */; };
 		F1EBDD5E2B4440FC0091E0D5 /* UIView+UIStackView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD5D2B4440FC0091E0D5 /* UIView+UIStackView+Constraints.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +54,8 @@
 		F10DD2742B3D85C10065FDCF /* TreeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TreeVC.xib; sourceTree = "<group>"; };
 		F10DD2772B3D8A6D0065FDCF /* TreeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeViewModel.swift; sourceTree = "<group>"; };
 		F10DD2792B3D8B460065FDCF /* RemoteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteError.swift; sourceTree = "<group>"; };
+		F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDisconnectedVC.swift; sourceTree = "<group>"; };
+		F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkDisconnectedVC.xib; sourceTree = "<group>"; };
 		F1E4578B2B3C5915006C50AF /* NodeTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1E4578E2B3C5915006C50AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1E457902B3C5915006C50AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,9 +72,6 @@
 		F1EBDD502B4401E90091E0D5 /* TreeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEndPoint.swift; sourceTree = "<group>"; };
 		F1EBDD522B440A4A0091E0D5 /* RemoteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteResponse.swift; sourceTree = "<group>"; };
 		F1EBDD552B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Connectivity.swift"; sourceTree = "<group>"; };
-		F1EBDD572B44270B0091E0D5 /* NetworkDisconnectedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDisconnectedVC.swift; sourceTree = "<group>"; };
-		F1EBDD582B44270B0091E0D5 /* NetworkDisconnectedVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkDisconnectedVC.xib; sourceTree = "<group>"; };
-		F1EBDD5B2B4440340091E0D5 /* NestedHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedHStack.swift; sourceTree = "<group>"; };
 		F1EBDD5D2B4440FC0091E0D5 /* UIView+UIStackView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+UIStackView+Constraints.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,11 +179,8 @@
 			children = (
 				F10DD2732B3D85C10065FDCF /* TreeVC.swift */,
 				F10DD2742B3D85C10065FDCF /* TreeVC.xib */,
-
-				F1EBDD572B44270B0091E0D5 /* NetworkDisconnectedVC.swift */,
-				F1EBDD582B44270B0091E0D5 /* NetworkDisconnectedVC.xib */,
-				F1EBDD5B2B4440340091E0D5 /* NestedHStack.swift */,
-
+				F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */,
+				F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -328,7 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1EBDD5A2B44270B0091E0D5 /* NetworkDisconnectedVC.xib in Resources */,
+				F131EDFF2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib in Resources */,
 				F10DD2762B3D85C10065FDCF /* TreeVC.xib in Resources */,
 				F1E4579B2B3C5916006C50AF /* LaunchScreen.storyboard in Resources */,
 				F1E457982B3C5916006C50AF /* Assets.xcassets in Resources */,
@@ -358,17 +353,15 @@
 			files = (
 				F1EBDD512B4401E90091E0D5 /* TreeEndPoint.swift in Sources */,
 				F1EBDD4E2B44019B0091E0D5 /* EndPointProtocol.swift in Sources */,
-				F1EBDD5C2B4440340091E0D5 /* NestedHStack.swift in Sources */,
 				F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */,
 				F10DD2782B3D8A6D0065FDCF /* TreeViewModel.swift in Sources */,
 				F1EBDD5E2B4440FC0091E0D5 /* UIView+UIStackView+Constraints.swift in Sources */,
-
 				F1EBDD532B440A4A0091E0D5 /* RemoteResponse.swift in Sources */,
+				F131EDFE2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift in Sources */,
 				F10DD27A2B3D8B460065FDCF /* RemoteError.swift in Sources */,
 				F1E457C32B3C6C0B006C50AF /* RESTAPIProtocol.swift in Sources */,
 				F10DD2752B3D85C10065FDCF /* TreeVC.swift in Sources */,
 				F10DD2722B3D84F70065FDCF /* Tree.swift in Sources */,
-				F1EBDD592B44270B0091E0D5 /* NetworkDisconnectedVC.swift in Sources */,
 				F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */,
 				F10DD2702B3D84C90065FDCF /* TreeService.swift in Sources */,
 				F1EBDD562B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift in Sources */,
