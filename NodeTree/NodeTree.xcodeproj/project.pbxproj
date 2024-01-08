@@ -130,6 +130,7 @@
 		F131EE022B4BFFD100FCF499 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F1EBDD542B4416B30091E0D5 /* Extension */,
 				F131EE032B4C004A00FCF499 /* NetworkScene */,
 				F131EE042B4C006800FCF499 /* TreeScene */,
 			);
@@ -148,8 +149,8 @@
 		F131EE042B4C006800FCF499 /* TreeScene */ = {
 			isa = PBXGroup;
 			children = (
-				F1E457BF2B3C6BC5006C50AF /* Views */,
-				F1E457C02B3C6BCC006C50AF /* ViewModels */,
+				F1E457BF2B3C6BC5006C50AF /* View */,
+				F1E457C02B3C6BCC006C50AF /* ViewModel */,
 			);
 			path = TreeScene;
 			sourceTree = "<group>";
@@ -167,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				F10DD26E2B3D84BC0065FDCF /* Repositories */,
-				F1E457C12B3C6BDD006C50AF /* dt */,
+				F1E457C12B3C6BDD006C50AF /* Models */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -196,7 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				F131EE052B4C00AB00FCF499 /* Services */,
-				F1EBDD542B4416B30091E0D5 /* Extension */,
 				F131EE072B4C01AF00FCF499 /* Data */,
 				F131EE002B4BF2A600FCF499 /* Presentation */,
 				F1E457972B3C5916006C50AF /* Assets.xcassets */,
@@ -232,30 +232,30 @@
 			path = NetworkingHelpers;
 			sourceTree = "<group>";
 		};
-		F1E457BF2B3C6BC5006C50AF /* Views */ = {
+		F1E457BF2B3C6BC5006C50AF /* View */ = {
 			isa = PBXGroup;
 			children = (
 				F10DD2732B3D85C10065FDCF /* TreeVC.swift */,
 				F10DD2742B3D85C10065FDCF /* TreeVC.xib */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
-		F1E457C02B3C6BCC006C50AF /* ViewModels */ = {
+		F1E457C02B3C6BCC006C50AF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				F10DD2772B3D8A6D0065FDCF /* TreeViewModel.swift */,
 			);
-			path = ViewModels;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		F1E457C12B3C6BDD006C50AF /* dt */ = {
+		F1E457C12B3C6BDD006C50AF /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				F10DD2712B3D84F70065FDCF /* Tree.swift */,
 				F1EBDD522B440A4A0091E0D5 /* RemoteResponse.swift */,
 			);
-			path = dt;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F1EBDD4F2B4401D60091E0D5 /* EndPoints */ = {
