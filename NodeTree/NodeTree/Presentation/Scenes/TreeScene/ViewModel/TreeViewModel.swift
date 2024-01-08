@@ -10,7 +10,7 @@ import Combine
 
 protocol TreeViewModelProtocl {
     func fetchRoot()
-    func fetchNodeWith(treeID: String)
+    func fetchNodeOf(parent: Tree)
 }
 
 extension TreeVC {
@@ -29,7 +29,7 @@ extension TreeVC.ViewModel: TreeViewModelProtocl {
     func fetchRoot() {
         
         treeUseCase.fetchTree()
-            .decode(type: RemoteResponse<[Tree]>.self, decoder: JSONDecoder.init())
+            .decode(type: [Tree].self, decoder: JSONDecoder.init())
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -48,15 +48,40 @@ extension TreeVC.ViewModel: TreeViewModelProtocl {
                 receiveValue: { [weak self] response in
                     print(response, "👻")
                     
-                    self?.viewUpdates.send(.fetchRoot(tree: response.data))
+                    self?.viewUpdates.send(.fetchRoot(tree: response))
                     
                 }
             )
             .store(in: &bag)
     }
     
-    func fetchNodeWith(treeID: String) {
+    func fetchNodeOf(parent: Tree) {
         
+        treeUseCase.fetchChilds(treeID: parent.structID)
+            .decode(type: [Tree].self, decoder: JSONDecoder.init())
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    
+                    switch completion {
+                        
+                    case .finished:
+                        print("finished fetching Childs of \(parent.structDesc)")
+                    case .failure(let error):
+                        print("error happened in Fetching Childs of \(parent.structDesc) ")
+                        
+                        self?.viewUpdates.send(.showToastMessage(message: error.localizedDescription))
+                        
+                    }
+                },
+                receiveValue: { [weak self] response in
+                    print(response, "👻")
+                    
+                    self?.viewUpdates.send(.fetchAllChildsOf(Root: parent, childs: response))
+                    
+                }
+            )
+            .store(in: &bag)
     }
     
     
@@ -66,7 +91,7 @@ extension TreeVC.ViewModel: TreeViewModelProtocl {
 extension TreeVC.ViewModel {
     enum ViewUpdates {
         case fetchRoot(tree: [Tree])
-        case fetchAllChilds(childs: [Tree])
+        case fetchAllChildsOf(Root: Tree, childs: [Tree])
         case showToastMessage(message: String)
     }
 }

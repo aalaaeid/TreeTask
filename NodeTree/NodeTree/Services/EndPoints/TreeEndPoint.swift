@@ -13,24 +13,24 @@ enum TreeEndPoint: EndpointProtocol {
     case getChildren(treeID: String)
     
     var baseURL: String {
-        return "https://api.darksky.net"
+        return "http://localhost:3000/"
     }
     
     var absoluteURL: String {
         switch self {
         case .getRoot:
-            return baseURL + ""
+            return baseURL + "GetRoot"
         case let .getChildren(treeID):
-            return baseURL + "\(treeID)"
+            return baseURL + "GetChildren/structID=\(treeID)"
         }
     }
     
     var params: [String : String] {
         switch self {
         case .getRoot:
-            return ["": ""]
+            return [:]
         case .getChildren:
-            return ["": ""]
+            return [:]
         }
     }
     
