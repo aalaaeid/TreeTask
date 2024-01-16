@@ -55,6 +55,10 @@ extension TreeVC.ViewModel: TreeViewModelProtocl {
             .store(in: &bag)
     }
     
+    func reloadNodeOf(parent: Tree) {
+        self.viewUpdates.send(.reloadChildStateOf(Root: parent))
+    }
+    
     func fetchNodeOf(parent: Tree) {
         
         treeUseCase.fetchChilds(treeID: parent.structID)
@@ -92,6 +96,7 @@ extension TreeVC.ViewModel {
     enum ViewUpdates {
         case fetchRoot(tree: [Tree])
         case fetchAllChildsOf(Root: Tree, childs: [Tree])
+        case reloadChildStateOf(Root: Tree)
         case showToastMessage(message: String)
     }
 }

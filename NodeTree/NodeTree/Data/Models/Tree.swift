@@ -16,13 +16,11 @@ struct Tree: Codable, Hashable {
     }
     
     let structDesc, childnodecount: String
-    let childs: [Tree]
     let structID: String
 
     enum CodingKeys: String, CodingKey {
         case structDesc = "STRUCT_DESC"
         case childnodecount = "CHILDNODECOUNT"
-        case childs = "Childs"
         case structID = "STRUCT_ID"
     }
 }

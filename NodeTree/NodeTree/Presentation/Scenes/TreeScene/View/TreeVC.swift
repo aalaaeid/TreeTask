@@ -30,6 +30,7 @@ class TreeVC: UIViewController {
     
     
     var datasource : UICollectionViewDiffableDataSource<String,Tree>!
+    var snap = NSDiffableDataSourceSectionSnapshot<Tree>()
     
     //MARK: - lifeCycle
 
@@ -71,25 +72,36 @@ class TreeVC: UIViewController {
     func bindViewModel() {
         viewModel
             .viewUpdates
+            .receive(on: RunLoop.main)
             .sink { [weak self] (viewModelUpdate) in
                 guard let self = self else { return }
                 
                 switch viewModelUpdate {
                     
                 case .fetchRoot(tree: let tree):
-                    viewModel.fetchNodeOf(parent: tree[0])
-
+                    snap.append(tree, to: nil) // root
+                    self.datasource.apply(snap, to: "Groups", animatingDifferences: true)
 
                 case .fetchAllChildsOf(Root: let parent, childs: let childs):
-                    var snap = NSDiffableDataSourceSectionSnapshot<Tree>()
-                    snap.append([parent], to: nil) // root
+                   
                     snap.append(childs, to: parent)
-                    for child in childs {
-                        if child.childnodecount != "0" {
-                            snap.append(child.childs, to: child)
-                        }
+                    if parent.childnodecount != "0" {
+                        snap.expand([parent])
                     }
                     self.datasource.apply(snap, to: "Groups", animatingDifferences: true)
+
+                    
+                case .reloadChildStateOf(Root: let parent):
+                    print(parent.structID, "-----")
+                    if parent.childnodecount != "0" {
+                        if snap.isExpanded(parent) {
+                            snap.collapse([parent])
+                        } else {
+                            snap.expand([parent])
+                        }
+
+                        self.datasource.apply(snap, to: "Groups",animatingDifferences: true)
+                    }
                     
                 case .showToastMessage(message: let message):
                     //show popup alert
@@ -107,23 +119,21 @@ class TreeVC: UIViewController {
 //MARK: - UICollectionViewDelegate
 extension TreeVC: UICollectionViewDelegate {
  
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        var snap = self.datasource.snapshot(for: "Groups")
-        guard let snapOFIndex = self.datasource.itemIdentifier(for: indexPath) else {return false}
-        let snap2 = snap.snapshot(of: snapOFIndex, includingParent: false)
-        let hasChildren = snap2.items.count > 0
-        if hasChildren {
-            if snap.isExpanded(snapOFIndex) {
-                snap.collapse([snapOFIndex])
-            } else {
-                snap.expand([snapOFIndex])
-            }
-            self.datasource.apply(snap, to: "Groups")
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let snapSection = self.datasource.snapshot(for: "Groups")
+        guard let snapOFIndex = self.datasource.itemIdentifier(for: indexPath) else {return}
+        
+        
+        let snapshot = snapSection.snapshot(of: snapOFIndex, includingParent: false)
+        let hasChildren = snapshot.items.count > 0
+        
+        if !hasChildren {
+            viewModel.fetchNodeOf(parent: snapOFIndex)
+        } else {
+            viewModel.reloadNodeOf(parent: snapOFIndex)
         }
-        UIView.performWithoutAnimation {
-            collectionView.reloadData()
-        }
-        return !hasChildren
+        
         
     }
     
