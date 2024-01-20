@@ -15,6 +15,8 @@
 		F10DD27A2B3D8B460065FDCF /* RemoteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2792B3D8B460065FDCF /* RemoteError.swift */; };
 		F131EDFE2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */; };
 		F131EDFF2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */; };
+		F19F0B6D2B595461003F829E /* StructCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F0B6B2B595461003F829E /* StructCell.swift */; };
+		F19F0B6E2B595461003F829E /* StructCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F19F0B6C2B595461003F829E /* StructCell.xib */; };
 		F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4578E2B3C5915006C50AF /* AppDelegate.swift */; };
 		F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457902B3C5915006C50AF /* SceneDelegate.swift */; };
 		F1E457982B3C5916006C50AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1E457972B3C5916006C50AF /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 		F10DD2792B3D8B460065FDCF /* RemoteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteError.swift; sourceTree = "<group>"; };
 		F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDisconnectedVC.swift; sourceTree = "<group>"; };
 		F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkDisconnectedVC.xib; sourceTree = "<group>"; };
+		F19F0B6B2B595461003F829E /* StructCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructCell.swift; sourceTree = "<group>"; };
+		F19F0B6C2B595461003F829E /* StructCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StructCell.xib; sourceTree = "<group>"; };
 		F1E4578B2B3C5915006C50AF /* NodeTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1E4578E2B3C5915006C50AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1E457902B3C5915006C50AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +175,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		F19F0B6A2B594D01003F829E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F19F0B6B2B595461003F829E /* StructCell.swift */,
+				F19F0B6C2B595461003F829E /* StructCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		F1E457822B3C5915006C50AF = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +248,7 @@
 			children = (
 				F10DD2732B3D85C10065FDCF /* TreeVC.swift */,
 				F10DD2742B3D85C10065FDCF /* TreeVC.xib */,
+				F19F0B6A2B594D01003F829E /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -376,6 +390,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F19F0B6E2B595461003F829E /* StructCell.xib in Resources */,
 				F131EDFF2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib in Resources */,
 				F10DD2762B3D85C10065FDCF /* TreeVC.xib in Resources */,
 				F1E4579B2B3C5916006C50AF /* LaunchScreen.storyboard in Resources */,
@@ -407,6 +422,7 @@
 				F1EBDD512B4401E90091E0D5 /* TreeEndPoint.swift in Sources */,
 				F1EBDD4E2B44019B0091E0D5 /* EndPointProtocol.swift in Sources */,
 				F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */,
+				F19F0B6D2B595461003F829E /* StructCell.swift in Sources */,
 				F10DD2782B3D8A6D0065FDCF /* TreeViewModel.swift in Sources */,
 				F1EBDD532B440A4A0091E0D5 /* RemoteResponse.swift in Sources */,
 				F131EDFE2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift in Sources */,

@@ -29,43 +29,34 @@ class TreeVC: UIViewController {
     @IBOutlet weak var treeCollectionView: UICollectionView!
     
     
-    var datasource : UICollectionViewDiffableDataSource<String,Tree>!
-    var snap = NSDiffableDataSourceSectionSnapshot<Tree>()
+    
+    private typealias DataSource = UICollectionViewDiffableDataSource<String, Tree>
+    private typealias Snapshot = NSDiffableDataSourceSectionSnapshot<Tree>
+    
+    let cellreg = UICollectionView.CellRegistration<UICollectionViewListCell, Tree>() { cell, indexPath, name in
+        var config =  cell.defaultContentConfiguration()
+        config.text = name.structDesc
+        cell.contentConfiguration = config
+    }
+    
+    private lazy var dataSource = makeDataSource(cellRegistration: cellreg)
+    private var snapshot = Snapshot()
     
     //MARK: - lifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let config = UICollectionLayoutListConfiguration(appearance: .plain)
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
-        treeCollectionView.collectionViewLayout = layout
-        
-        let cellreg = UICollectionView.CellRegistration<UICollectionViewListCell, Tree>() { cell, indexPath, name in
-            var config =  cell.defaultContentConfiguration()
-            config.text = name.structDesc
-            cell.contentConfiguration = config
-        
-              let snap = self.datasource.snapshot(for: "Groups")
-              let snapItems = snap.snapshot(of: name, includingParent: false)
-              let labelAccessory: UICellAccessory =
-                   snap.isExpanded(name) ? .label(text: "-") : .label(text: "+")
-               let hasChildren = snapItems.items.count > 0  //name.childnodecount != "0"
-            
-            cell.accessories = hasChildren ? [labelAccessory] : []
-            
-        }
-        self.datasource = UICollectionViewDiffableDataSource<String,Tree>(collectionView: treeCollectionView) { collectionView, indexPath, item in
-            collectionView.dequeueConfiguredReusableCell(using: cellreg, for: indexPath, item: item)
-        }
-        
-        treeCollectionView.delegate = self
+        setupCollectionView()
 
-    
         viewModel.fetchRoot()
  
         bindViewModel()
     }
+    
+
+
+
     
     
     //MARK: - viewSetup
@@ -79,29 +70,17 @@ class TreeVC: UIViewController {
                 switch viewModelUpdate {
                     
                 case .fetchRoot(tree: let tree):
-                    snap.append(tree, to: nil) // root
-                    self.datasource.apply(snap, to: "Groups", animatingDifferences: true)
+                    applyRootSnapshot(with: tree)
 
                 case .fetchAllChildsOf(Root: let parent, childs: let childs):
                    
-                    snap.append(childs, to: parent)
-                    if parent.childnodecount != "0" {
-                        snap.expand([parent])
-                    }
-                    self.datasource.apply(snap, to: "Groups", animatingDifferences: true)
+                    applyChildsSnapshot(with: childs, parent: parent)
 
                     
                 case .reloadChildStateOf(Root: let parent):
                     print(parent.structID, "-----")
-                    if parent.childnodecount != "0" {
-                        if snap.isExpanded(parent) {
-                            snap.collapse([parent])
-                        } else {
-                            snap.expand([parent])
-                        }
+                    expandSnapshotFor(parent: parent)
 
-                        self.datasource.apply(snap, to: "Groups",animatingDifferences: true)
-                    }
                     
                 case .showToastMessage(message: let message):
                     //show popup alert
@@ -121,14 +100,10 @@ extension TreeVC: UICollectionViewDelegate {
  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let snapSection = self.datasource.snapshot(for: "Groups")
-        guard let snapOFIndex = self.datasource.itemIdentifier(for: indexPath) else {return}
+        guard let snapOFIndex = dataSource.itemIdentifier(for: indexPath) else {return}
+
         
-        
-        let snapshot = snapSection.snapshot(of: snapOFIndex, includingParent: false)
-        let hasChildren = snapshot.items.count > 0
-        
-        if !hasChildren {
+        if !selectedSnapshotHasChilds(indexPath: indexPath) {
             viewModel.fetchNodeOf(parent: snapOFIndex)
         } else {
             viewModel.reloadNodeOf(parent: snapOFIndex)
@@ -139,3 +114,76 @@ extension TreeVC: UICollectionViewDelegate {
     
 
 }
+
+
+extension TreeVC {
+    
+    private func setupCollectionView()  {
+     
+        let layout = UICollectionViewCompositionalLayout.list(using: .init(appearance: .plain))
+        treeCollectionView.collectionViewLayout = layout
+  
+        treeCollectionView.delegate = self
+    }
+    
+
+
+    private func makeDataSource(cellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Tree>) -> DataSource {
+//        let cellRegistration = StructCell.registration()
+        return DataSource(collectionView: treeCollectionView) { collectionView, indexPath, itemIdentifier in
+                collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
+                                                             for: indexPath,
+                                                             item: itemIdentifier)
+
+        }
+
+    }
+
+    func applyRootSnapshot(with treeItem: [Tree], animatingDifferences: Bool = true) {
+        snapshot.append(treeItem, to: nil) // root
+
+
+        dataSource.apply(snapshot, to: "Groups", animatingDifferences: animatingDifferences)
+    }
+    
+    
+    func applyChildsSnapshot(with childs: [Tree], parent: Tree, animatingDifferences: Bool = true) {
+
+        snapshot.append(childs, to: parent)
+        if parent.childnodecount != "0" {
+            snapshot.expand([parent])
+        }
+        dataSource.apply(snapshot, to: "Groups", animatingDifferences: animatingDifferences)
+    }
+    
+    func expandSnapshotFor(parent: Tree, animatingDifferences: Bool = true) {
+       
+        
+        if parent.childnodecount != "0" {
+            if snapshot.isExpanded(parent) {
+                snapshot.collapse([parent])
+            } else {
+                snapshot.expand([parent])
+            }
+            
+        }
+        dataSource.apply(snapshot, to: "Groups", animatingDifferences: animatingDifferences)
+    }
+
+    func selectedSnapshotHasChilds(indexPath: IndexPath) -> Bool {
+
+        guard let treeIndex = self.dataSource.itemIdentifier(for: indexPath) else {return false}
+
+
+        let snapOFIndex = snapshot.snapshot(of: treeIndex, includingParent: false)
+        let hasChildren = snapOFIndex.items.count > 0
+        return hasChildren
+
+    }
+    
+    
+}
+
+
+
+
