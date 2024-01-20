@@ -62,31 +62,31 @@ class TreeVC: UIViewController {
     //MARK: - viewSetup
     func bindViewModel() {
         viewModel
-            .viewUpdates
+            .fetchTreeSuccess
             .receive(on: RunLoop.main)
-            .sink { [weak self] (viewModelUpdate) in
+            .sink { [weak self] tree in
                 guard let self = self else { return }
-                
-                switch viewModelUpdate {
-                    
-                case .fetchRoot(tree: let tree):
-                    applyRootSnapshot(with: tree)
-
-                case .fetchAllChildsOf(Root: let parent, childs: let childs):
-                   
-                    applyChildsSnapshot(with: childs, parent: parent)
-
-                    
-                case .reloadChildStateOf(Root: let parent):
-                    print(parent.structID, "-----")
-                    expandSnapshotFor(parent: parent)
-
-                    
-                case .showToastMessage(message: let message):
-                    //show popup alert
-                    return
-                }
+                applyRootSnapshot(with: tree)
             }.store(in: &bag)
+        
+        viewModel
+            .fetchChildsSuccess
+            .receive(on: RunLoop.main)
+            .sink { [weak self] (root: Tree, childs: [Tree]) in
+                guard let self = self else { return }
+                applyChildsSnapshot(with: childs, parent: root)
+
+            }.store(in: &bag)
+        
+        viewModel
+            .reloadChildSuccess
+            .receive(on: RunLoop.main)
+            .sink { [weak self] parent in
+                guard let self = self else { return }
+                expandSnapshotFor(parent: parent)
+
+            }.store(in: &bag)
+        
         
     }
 
@@ -104,8 +104,11 @@ extension TreeVC: UICollectionViewDelegate {
 
         
         if !selectedSnapshotHasChilds(indexPath: indexPath) {
+            
             viewModel.fetchNodeOf(parent: snapOFIndex)
+            
         } else {
+            
             viewModel.reloadNodeOf(parent: snapOFIndex)
         }
         
