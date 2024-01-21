@@ -12,10 +12,10 @@ import Combine
 
 protocol DefaultTreeRepository {
     /// Fetch Root Tree
-    func fetchTree() -> AnyPublisher<Data, Error>
+    func fetchTree() -> AnyPublisher<[Tree], Error>
     /// Fetch all Childs of tree ID
     /// - Parameter treeID: ID of a given tree
-    func fetchChilds(treeID: String) -> AnyPublisher<Data, Error>
+    func fetchChilds(treeID: String) -> AnyPublisher<[Tree], Error>
  
 
 }
@@ -26,7 +26,7 @@ struct TreeRepository: DefaultTreeRepository {
     
     private let apiProvider = APIProvider()
     
-    func fetchTree() -> AnyPublisher<Data, Error> {
+    func fetchTree() -> AnyPublisher<[Tree], Error> {
         let request = URLRequestBuilder(path: .getRoot)
             .set(method: .get)
         
@@ -35,7 +35,7 @@ struct TreeRepository: DefaultTreeRepository {
             .eraseToAnyPublisher()
     }
     
-    func fetchChilds(treeID: String) -> AnyPublisher<Data, Error> {
+    func fetchChilds(treeID: String) -> AnyPublisher<[Tree], Error> {
         let request = URLRequestBuilder(path: .getChilds)
             .set(method: .get)
             .set(parameters: .path(["structID" : treeID]))

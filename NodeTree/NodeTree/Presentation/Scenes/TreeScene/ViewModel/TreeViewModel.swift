@@ -31,7 +31,6 @@ extension TreeVC.ViewModel: TreeViewModelProtocl {
     func fetchRoot() {
         
         treeUseCase.fetchTree()
-            .decode(type: [Tree].self, decoder: JSONDecoder.init())
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -63,7 +62,6 @@ extension TreeVC.ViewModel: TreeViewModelProtocl {
     func fetchNodeOf(parent: Tree) {
         
         treeUseCase.fetchChilds(treeID: parent.structID)
-            .decode(type: [Tree].self, decoder: JSONDecoder.init())
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: { [weak self] completion in

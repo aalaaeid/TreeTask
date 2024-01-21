@@ -13,7 +13,7 @@ import Combine
 
 class APIProvider {
     
-    func getData<T: APIRequest>(from request: T) -> AnyPublisher<Data, Error> {
+    func getData<T: APIRequest, U: Decodable>(from request: T) -> AnyPublisher<U, Error> {
 
         do {
             let request = try buildURLRequest(for: request)
@@ -39,7 +39,7 @@ class APIProvider {
 
     
     // MARK: - Getting data
-    private func loadData(with request: URLRequest) -> AnyPublisher<Data, Error> {
+    private func loadData<U: Decodable>(with request: URLRequest) -> AnyPublisher<U, Error> {
 
         return URLSession.shared.dataTaskPublisher(for: request)
             .mapError({ error -> Error in
@@ -51,6 +51,8 @@ class APIProvider {
             }, receiveOutput: { (d) in
                 print(String(data: d, encoding: .utf8))
             }, receiveCompletion: nil, receiveCancel: nil, receiveRequest: nil)
+            .decode(type: U.self, decoder: JSONDecoder())
+            .mapError { $0 as Error }
             .eraseToAnyPublisher()
     }
     

@@ -26,7 +26,7 @@
 		F1E457A62B3C5916006C50AF /* NodeTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457A52B3C5916006C50AF /* NodeTreeTests.swift */; };
 		F1E457B02B3C5916006C50AF /* NodeTreeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457AF2B3C5916006C50AF /* NodeTreeUITests.swift */; };
 		F1E457B22B3C5916006C50AF /* NodeTreeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457B12B3C5916006C50AF /* NodeTreeUITestsLaunchTests.swift */; };
-		F1E457C32B3C6C0B006C50AF /* RESTAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457C22B3C6C0B006C50AF /* RESTAPIProtocol.swift */; };
+		F1E457C32B3C6C0B006C50AF /* APIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457C22B3C6C0B006C50AF /* APIProvider.swift */; };
 		F1EBDD4E2B44019B0091E0D5 /* EndPointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD4D2B44019B0091E0D5 /* EndPointProtocol.swift */; };
 		F1EBDD512B4401E90091E0D5 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD502B4401E90091E0D5 /* URLRequestBuilder.swift */; };
 		F1EBDD532B440A4A0091E0D5 /* RemoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD522B440A4A0091E0D5 /* RemoteResponse.swift */; };
@@ -74,7 +74,7 @@
 		F1E457AB2B3C5916006C50AF /* NodeTreeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NodeTreeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1E457AF2B3C5916006C50AF /* NodeTreeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTreeUITests.swift; sourceTree = "<group>"; };
 		F1E457B12B3C5916006C50AF /* NodeTreeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeTreeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		F1E457C22B3C6C0B006C50AF /* RESTAPIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTAPIProtocol.swift; sourceTree = "<group>"; };
+		F1E457C22B3C6C0B006C50AF /* APIProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIProvider.swift; sourceTree = "<group>"; };
 		F1EBDD4D2B44019B0091E0D5 /* EndPointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointProtocol.swift; sourceTree = "<group>"; };
 		F1EBDD502B4401E90091E0D5 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		F1EBDD522B440A4A0091E0D5 /* RemoteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteResponse.swift; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 		F1E457BE2B3C6BBB006C50AF /* NetworkingHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				F1E457C22B3C6C0B006C50AF /* RESTAPIProtocol.swift */,
+				F1E457C22B3C6C0B006C50AF /* APIProvider.swift */,
 				F10DD2792B3D8B460065FDCF /* RemoteError.swift */,
 				F1EBDD4D2B44019B0091E0D5 /* EndPointProtocol.swift */,
 				F1EBDD502B4401E90091E0D5 /* URLRequestBuilder.swift */,
@@ -433,7 +433,7 @@
 				F1EBDD532B440A4A0091E0D5 /* RemoteResponse.swift in Sources */,
 				F131EDFE2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift in Sources */,
 				F10DD27A2B3D8B460065FDCF /* RemoteError.swift in Sources */,
-				F1E457C32B3C6C0B006C50AF /* RESTAPIProtocol.swift in Sources */,
+				F1E457C32B3C6C0B006C50AF /* APIProvider.swift in Sources */,
 				F16C8A292B5C753400FA8F96 /* EndPoints.swift in Sources */,
 				F10DD2752B3D85C10065FDCF /* TreeVC.swift in Sources */,
 				F10DD2722B3D84F70065FDCF /* Tree.swift in Sources */,
