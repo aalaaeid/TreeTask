@@ -8,15 +8,12 @@
 import Foundation
 import Combine
 
-protocol TreeViewModelProtocl {
-    func fetchRoot()
-    func fetchNodeOf(parent: Tree)
-}
+
 
 extension TreeVC {
     class ViewModel {
         
-        private var treeUseCase = TreeRepository.init()
+        private var treeRepository = RemoteTreeRepository.init()
         var bag: Set<AnyCancellable> = []
         var fetchTreeSuccess: PassthroughSubject<[Tree], Never> = .init()
         var fetchChildsSuccess: PassthroughSubject<(Root: Tree, childs: [Tree]), Never> = .init()
@@ -26,24 +23,22 @@ extension TreeVC {
     
 }
 
-extension TreeVC.ViewModel: TreeViewModelProtocl {
+extension TreeVC.ViewModel: TreeViewModelUseCase {
     
     func fetchRoot() {
         
-        treeUseCase.fetchTree()
+        treeRepository.fetchTree()
             .receive(on: RunLoop.main)
             .sink(
-                receiveCompletion: { [weak self] completion in
+                receiveCompletion: {  completion in
                     
                     switch completion {
                         
                     case .finished:
                         print("finished fetching Root")
                     case .failure(let error):
-                        print("error happened in Fetching Root")
-                        
-//                        self?.viewUpdates.send(.showToastMessage(message: error.localizedDescription))
-                        
+                        print("error happened in Fetching Root \(error)")
+                                                
                     }
                 },
                 receiveValue: { [weak self] response in
@@ -61,17 +56,17 @@ extension TreeVC.ViewModel: TreeViewModelProtocl {
     
     func fetchNodeOf(parent: Tree) {
         
-        treeUseCase.fetchChilds(treeID: parent.structID)
+        treeRepository.fetchChilds(treeID: parent.structID)
             .receive(on: RunLoop.main)
             .sink(
-                receiveCompletion: { [weak self] completion in
+                receiveCompletion: {  completion in
                     
                     switch completion {
                         
                     case .finished:
                         print("finished fetching Childs of \(parent.structDesc)")
                     case .failure(let error):
-                        print("error happened in Fetching Childs of \(parent.structDesc) ")
+                        print("error \(error) happened in Fetching Childs of \(parent.structDesc) ")
                         
                     }
                 },

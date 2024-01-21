@@ -9,20 +9,7 @@ import Foundation
 import Combine
 
 
-
-protocol DefaultTreeRepository {
-    /// Fetch Root Tree
-    func fetchTree() -> AnyPublisher<[Tree], Error>
-    /// Fetch all Childs of tree ID
-    /// - Parameter treeID: ID of a given tree
-    func fetchChilds(treeID: String) -> AnyPublisher<[Tree], Error>
- 
-
-}
-
-
-
-struct TreeRepository: DefaultTreeRepository {
+struct RemoteTreeRepository: FetchTreeUseCase {
     
     private let apiProvider = APIProvider()
     
@@ -49,7 +36,7 @@ struct TreeRepository: DefaultTreeRepository {
 }
 
 
-extension TreeRepository {
+extension RemoteTreeRepository {
     enum WeatherServiceErrors: Error {
         case treeIDNil
         

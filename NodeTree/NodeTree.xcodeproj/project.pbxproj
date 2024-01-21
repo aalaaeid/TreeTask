@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F10DD2702B3D84C90065FDCF /* TreeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD26F2B3D84C90065FDCF /* TreeRepository.swift */; };
+		F10DD2702B3D84C90065FDCF /* RemoteTreeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD26F2B3D84C90065FDCF /* RemoteTreeRepository.swift */; };
 		F10DD2722B3D84F70065FDCF /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2712B3D84F70065FDCF /* Tree.swift */; };
 		F10DD2752B3D85C10065FDCF /* TreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2732B3D85C10065FDCF /* TreeVC.swift */; };
 		F10DD2762B3D85C10065FDCF /* TreeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F10DD2742B3D85C10065FDCF /* TreeVC.xib */; };
@@ -19,6 +19,7 @@
 		F16C8A292B5C753400FA8F96 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16C8A282B5C753400FA8F96 /* EndPoints.swift */; };
 		F19F0B6D2B595461003F829E /* StructCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F0B6B2B595461003F829E /* StructCell.swift */; };
 		F19F0B6E2B595461003F829E /* StructCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F19F0B6C2B595461003F829E /* StructCell.xib */; };
+		F1B566BC2B5D78B1008A6D15 /* UseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B566BB2B5D78B1008A6D15 /* UseCases.swift */; };
 		F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4578E2B3C5915006C50AF /* AppDelegate.swift */; };
 		F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E457902B3C5915006C50AF /* SceneDelegate.swift */; };
 		F1E457982B3C5916006C50AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1E457972B3C5916006C50AF /* Assets.xcassets */; };
@@ -51,7 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F10DD26F2B3D84C90065FDCF /* TreeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeRepository.swift; sourceTree = "<group>"; };
+		F10DD26F2B3D84C90065FDCF /* RemoteTreeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTreeRepository.swift; sourceTree = "<group>"; };
 		F10DD2712B3D84F70065FDCF /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		F10DD2732B3D85C10065FDCF /* TreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeVC.swift; sourceTree = "<group>"; };
 		F10DD2742B3D85C10065FDCF /* TreeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TreeVC.xib; sourceTree = "<group>"; };
@@ -63,6 +64,7 @@
 		F16C8A282B5C753400FA8F96 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		F19F0B6B2B595461003F829E /* StructCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructCell.swift; sourceTree = "<group>"; };
 		F19F0B6C2B595461003F829E /* StructCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StructCell.xib; sourceTree = "<group>"; };
+		F1B566BB2B5D78B1008A6D15 /* UseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCases.swift; sourceTree = "<group>"; };
 		F1E4578B2B3C5915006C50AF /* NodeTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1E4578E2B3C5915006C50AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1E457902B3C5915006C50AF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,7 +111,7 @@
 		F10DD26E2B3D84BC0065FDCF /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				F10DD26F2B3D84C90065FDCF /* TreeRepository.swift */,
+				F10DD26F2B3D84C90065FDCF /* RemoteTreeRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -188,6 +190,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		F1B566BA2B5D78A3008A6D15 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F1B566BB2B5D78B1008A6D15 /* UseCases.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 		F1E457822B3C5915006C50AF = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +221,7 @@
 		F1E4578D2B3C5915006C50AF /* NodeTree */ = {
 			isa = PBXGroup;
 			children = (
+				F1B566BA2B5D78A3008A6D15 /* Domain */,
 				F131EE052B4C00AB00FCF499 /* Services */,
 				F131EE072B4C01AF00FCF499 /* Data */,
 				F131EE002B4BF2A600FCF499 /* Presentation */,
@@ -427,6 +438,7 @@
 			files = (
 				F1EBDD512B4401E90091E0D5 /* URLRequestBuilder.swift in Sources */,
 				F1EBDD4E2B44019B0091E0D5 /* EndPointProtocol.swift in Sources */,
+				F1B566BC2B5D78B1008A6D15 /* UseCases.swift in Sources */,
 				F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */,
 				F19F0B6D2B595461003F829E /* StructCell.swift in Sources */,
 				F10DD2782B3D8A6D0065FDCF /* TreeViewModel.swift in Sources */,
@@ -439,7 +451,7 @@
 				F10DD2722B3D84F70065FDCF /* Tree.swift in Sources */,
 				F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */,
 				F16C8A232B5C1F0400FA8F96 /* UIView+Constraint.swift in Sources */,
-				F10DD2702B3D84C90065FDCF /* TreeRepository.swift in Sources */,
+				F10DD2702B3D84C90065FDCF /* RemoteTreeRepository.swift in Sources */,
 				F1EBDD562B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
