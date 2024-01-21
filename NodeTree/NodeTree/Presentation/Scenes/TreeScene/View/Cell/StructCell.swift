@@ -17,7 +17,6 @@ class StructCell: UICollectionViewCell {
         label.backgroundColor = .orange
         label.textColor = .black
         label.textAlignment = .left
-        
         return label
     }()
 
@@ -25,17 +24,27 @@ class StructCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
+        
         contentView.addSubview(nameLabel)
         nameLabel.anchor(top: contentView.topAnchor,
                          leading: contentView.leadingAnchor,
                          bottom: contentView.bottomAnchor,
                          trailing: contentView.trailingAnchor)
-        contentView.backgroundColor = .green
-
     }
 
     func configure(with tree: Tree) {
-        print(tree, "++")
         nameLabel.text = tree.structDesc
     }
 }

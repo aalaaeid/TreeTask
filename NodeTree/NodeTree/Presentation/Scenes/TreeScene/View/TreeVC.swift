@@ -8,16 +8,11 @@
 import UIKit
 import Combine
 
-enum TreeBehaviour {
-    case expandedWithNodes(childs: [Tree])
-    case expandedEmpty
-    case notExpanded
+
+enum Section {
+  case main
 }
 
-struct TreeTest: Hashable {
-    var name: String
-    var image: String
-}
 class TreeVC: UIViewController {
 
     
@@ -30,7 +25,7 @@ class TreeVC: UIViewController {
     
     
     
-    private typealias DataSource = UICollectionViewDiffableDataSource<String, Tree>
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Tree>
     private typealias Snapshot = NSDiffableDataSourceSectionSnapshot<Tree>
     
     let celldefaultReg = UICollectionView.CellRegistration<UICollectionViewListCell, Tree>() { cell, indexPath, name in
@@ -42,7 +37,7 @@ class TreeVC: UIViewController {
         cell.configure(with: item)
     }
     
-    private lazy var dataSource = makeDataSource(cellRegistration: celldefaultReg)
+    private lazy var dataSource = makeDataSource(cellRegistration: cellreg)
     private var snapshot = Snapshot()
     
     //MARK: - lifeCycle
@@ -125,17 +120,16 @@ extension TreeVC: UICollectionViewDelegate {
 extension TreeVC {
     
     private func setupCollectionView()  {
-     
-        let layout = UICollectionViewCompositionalLayout.list(using: .init(appearance: .plain))
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.bounds.width, height: 50)
         treeCollectionView.collectionViewLayout = layout
-  
+
         treeCollectionView.delegate = self
     }
     
 
 
-    private func makeDataSource(cellRegistration: UICollectionView.CellRegistration<UICollectionViewListCell, Tree>) -> DataSource {
-//        let cellRegistration = StructCell.registration()
+    private func makeDataSource(cellRegistration: UICollectionView.CellRegistration<StructCell, Tree>) -> DataSource {
         return DataSource(collectionView: treeCollectionView) { collectionView, indexPath, itemIdentifier in
                 collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
                                                              for: indexPath,
@@ -149,7 +143,7 @@ extension TreeVC {
         snapshot.append(treeItem, to: nil) // root
 
 
-        dataSource.apply(snapshot, to: "Groups", animatingDifferences: animatingDifferences)
+        dataSource.apply(snapshot, to: .main, animatingDifferences: animatingDifferences)
     }
     
     
@@ -159,7 +153,7 @@ extension TreeVC {
         if parent.childnodecount != "0" {
             snapshot.expand([parent])
         }
-        dataSource.apply(snapshot, to: "Groups", animatingDifferences: animatingDifferences)
+        dataSource.apply(snapshot, to: .main, animatingDifferences: animatingDifferences)
     }
     
     func expandSnapshotFor(parent: Tree, animatingDifferences: Bool = true) {
@@ -173,7 +167,7 @@ extension TreeVC {
             }
             
         }
-        dataSource.apply(snapshot, to: "Groups", animatingDifferences: animatingDifferences)
+        dataSource.apply(snapshot, to: .main, animatingDifferences: animatingDifferences)
     }
 
     func selectedSnapshotHasChilds(indexPath: IndexPath) -> Bool {
