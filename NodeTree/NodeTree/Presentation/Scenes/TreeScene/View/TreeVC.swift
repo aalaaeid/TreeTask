@@ -28,18 +28,18 @@ class TreeVC: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Tree>
     private typealias Snapshot = NSDiffableDataSourceSectionSnapshot<Tree>
     
-    let celldefaultReg = UICollectionView.CellRegistration<UICollectionViewListCell, Tree>() { cell, indexPath, name in
-        var config =  cell.defaultContentConfiguration()
-        config.text = name.structDesc
-        cell.contentConfiguration = config
-    }
-    let cellreg = UICollectionView.CellRegistration<StructCell, Tree>() { cell, indexPath, item in
-        cell.configure(with: item)
-    }
-    
-    private lazy var dataSource = makeDataSource(cellRegistration: cellreg)
+//    let celldefaultReg = UICollectionView.CellRegistration<UICollectionViewListCell, Tree>() { cell, indexPath, name in
+//        var config =  cell.defaultContentConfiguration()
+//        config.text = name.structDesc
+//        cell.contentConfiguration = config
+//    }
     private var snapshot = Snapshot()
+
+    var cellreg = UICollectionView.CellRegistration<StructCell, Tree> { cell, indexPath, itemIdentifier in}
+    private lazy var dataSource = makeDataSource(cellRegistration: cellreg)
     
+    var expandedSections: Set<Tree> = []
+
     //MARK: - lifeCycle
 
     override func viewDidLoad() {
@@ -50,6 +50,16 @@ class TreeVC: UIViewController {
         viewModel.fetchRoot()
  
         bindViewModel()
+        
+         cellreg = UICollectionView.CellRegistration<StructCell, Tree>() { cell, indexPath, item in
+           cell.configure(with: item)
+           
+             let section = self.dataSource.snapshot()
+            let isExpanded = self.expandedSections.contains(item)
+
+             cell.configure(with: isExpanded)
+
+       }
     }
     
 
@@ -162,8 +172,12 @@ extension TreeVC {
         if parent.childnodecount != "0" {
             if snapshot.isExpanded(parent) {
                 snapshot.collapse([parent])
+                expandedSections.remove(parent)
+
             } else {
                 snapshot.expand([parent])
+                expandedSections.insert(parent)
+
             }
             
         }

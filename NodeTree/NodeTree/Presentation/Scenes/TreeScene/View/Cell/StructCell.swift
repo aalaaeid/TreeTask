@@ -14,12 +14,33 @@ class StructCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
         var label = UILabel()
-        label.backgroundColor = .orange
+        label.backgroundColor = .white
         label.textColor = .black
         label.textAlignment = .left
         return label
     }()
+    
+    var revealImageView: UIImageView = {
+        var imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
 
+    var contemStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 5
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
+    }()
+    
+    let chevronRight = UIImage(systemName: "chevron.right",
+                               withConfiguration: UIImage.SymbolConfiguration(scale: .small))
+    let chevronDown = UIImage(systemName: "chevron.down",
+                              withConfiguration: UIImage.SymbolConfiguration(scale: .small))
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,15 +58,22 @@ class StructCell: UICollectionViewCell {
     
     private func setupUI() {
         
-        contentView.addSubview(nameLabel)
-        nameLabel.anchor(top: contentView.topAnchor,
+        contentView.addSubview(contemStackView)
+        contemStackView.anchor(top: contentView.topAnchor,
                          leading: contentView.leadingAnchor,
                          bottom: contentView.bottomAnchor,
                          trailing: contentView.trailingAnchor)
+        revealImageView.constrainWidth(constant: 25)
+        contemStackView.addArrangedSubviews([nameLabel, revealImageView])
     }
 
     func configure(with tree: Tree) {
         nameLabel.text = tree.structDesc
+    }
+    
+    func configure(with isExpanded: Bool) {
+
+        revealImageView.image = isExpanded ? chevronDown : chevronRight
     }
 }
 

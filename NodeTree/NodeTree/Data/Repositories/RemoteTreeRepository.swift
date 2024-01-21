@@ -36,19 +36,3 @@ struct RemoteTreeRepository: FetchTreeUseCase {
 }
 
 
-extension RemoteTreeRepository {
-    enum WeatherServiceErrors: Error {
-        case treeIDNil
-        
-        var errorDescription: String? {
-            switch self {
-                
-            case .treeIDNil:
-                return "Something goes wrong."
-
-            }
-        }
-    }
-
-}
-
