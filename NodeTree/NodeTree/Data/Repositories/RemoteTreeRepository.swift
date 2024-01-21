@@ -16,6 +16,7 @@ struct RemoteTreeRepository: FetchTreeUseCase {
     func fetchTree() -> AnyPublisher<[Tree], Error> {
         let request = URLRequestBuilder(path: .getRoot)
             .set(method: .get)
+            .build()
         
        return apiProvider
             .getData(from: request)
@@ -26,6 +27,7 @@ struct RemoteTreeRepository: FetchTreeUseCase {
         let request = URLRequestBuilder(path: .getChilds)
             .set(method: .get)
             .set(parameters: .path(["structID" : treeID]))
+            .build()
         
         return apiProvider
             .getData(from: request)

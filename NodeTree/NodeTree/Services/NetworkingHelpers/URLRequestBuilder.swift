@@ -40,8 +40,8 @@ class URLRequestBuilder: APIRequest {
     }
     
 
-    func build() throws -> URLRequest {
-        do {
+    func build() -> URLRequest {
+        
             var urlRequest = URLRequest(url: baseURL.appendingPathComponent(path.rawValue),
                                         cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                         timeoutInterval: 100)
@@ -53,7 +53,7 @@ class URLRequestBuilder: APIRequest {
        
             if let parameters = parameters {
                 if case let RequestParams.body(param) = parameters  {
-                    urlRequest.httpBody = try JSONEncoder().encode(param)
+                    urlRequest.httpBody = try? JSONEncoder().encode(param)
 
                 } else {
                     if let requestURL = buildRequestParams(with: path.rawValue,
@@ -68,9 +68,7 @@ class URLRequestBuilder: APIRequest {
             }
          
             return urlRequest
-        } catch {
-            throw APIErrors.requestBuilderFailed
-        }
+        
     }
 
 

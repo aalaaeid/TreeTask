@@ -10,11 +10,10 @@ import Combine
 
 class APIProvider {
     
-    func getData<T: APIRequest, U: Decodable>(from request: T) -> AnyPublisher<U, Error> {
+    func getData<U: Decodable>(from request: URLRequest) -> AnyPublisher<U, Error> {
 
         do {
-            let request = try buildURLRequest(for: request)
-
+            
             return loadData(with: request)
                 .eraseToAnyPublisher()
         } catch {
@@ -26,13 +25,6 @@ class APIProvider {
         
     }
     
-    func buildURLRequest<T: APIRequest>(for request: T) throws -> URLRequest {
-      return try URLRequestBuilder(with: request.baseURL, path: request.path)
-          .set(method: request.method)
-          .set(headers: request.headers)
-          .set(parameters: request.parameters)
-          .build()
-    }
 
     
     // MARK: - Getting data
