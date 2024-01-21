@@ -40,7 +40,6 @@ class URLRequestBuilder: APIRequest {
     }
     
 
-//Refactor
     func build() throws -> URLRequest {
         do {
             var urlRequest = URLRequest(url: baseURL.appendingPathComponent(path.rawValue),
@@ -51,17 +50,23 @@ class URLRequestBuilder: APIRequest {
             headers?.forEach {
                 urlRequest.addValue($0.value as! String, forHTTPHeaderField: $0.key)
             }
-            
-            if let params = parameters,
-               let requestURL = buildRequestParams(with: path.rawValue,
-                                                            parameters: params) {
-                
-                urlRequest = URLRequest(url: requestURL,
-                                        cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                        timeoutInterval: 100)
-            
+       
+            if let parameters = parameters {
+                if case let RequestParams.body(param) = parameters  {
+                    urlRequest.httpBody = try JSONEncoder().encode(param)
+
+                } else {
+                    if let requestURL = buildRequestParams(with: path.rawValue,
+                                                                    parameters: parameters) {
+                        
+                        urlRequest = URLRequest(url: requestURL,
+                                                cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                                                timeoutInterval: 100)
+                    
+                    }
+                }
             }
-            
+         
             return urlRequest
         } catch {
             throw APIErrors.requestBuilderFailed
@@ -75,7 +80,7 @@ class URLRequestBuilder: APIRequest {
    
     private func buildRequestParams(with path: String, parameters: RequestParams) -> URL?  {
         switch parameters {
-        case .body(let parameter):
+        case .body:
              return nil
             
         case .url(let parameter):
