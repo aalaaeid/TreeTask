@@ -40,7 +40,7 @@ class URLRequestBuilder: APIRequest {
     }
     
 
-//REfactor
+//Refactor
     func build() throws -> URLRequest {
         do {
             var urlRequest = URLRequest(url: baseURL.appendingPathComponent(path.rawValue),
@@ -77,11 +77,14 @@ class URLRequestBuilder: APIRequest {
         switch parameters {
         case .body(let parameter):
              return nil
+            
         case .url(let parameter):
-            return nil
-//            parameter?.map({
-//                URLQueryItem(name: $0.key, value: String(describing: $0.value))
-//            })
+            let queryParameter = parameter?.map({
+                URLQueryItem(name: $0.key, value: String(describing: $0.value))
+            }) ?? []
+            let fullPath = URL(string: path, relativeTo: baseURL)?.appending(queryItems: queryParameter)
+            
+            return fullPath
             
         case .path(let parameter):
             let parameterString = parameter?.map { "\($0.key)=\($0.value)" }.joined(separator: "&") ?? ""
