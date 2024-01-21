@@ -33,13 +33,16 @@ class TreeVC: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<String, Tree>
     private typealias Snapshot = NSDiffableDataSourceSectionSnapshot<Tree>
     
-    let cellreg = UICollectionView.CellRegistration<UICollectionViewListCell, Tree>() { cell, indexPath, name in
+    let celldefaultReg = UICollectionView.CellRegistration<UICollectionViewListCell, Tree>() { cell, indexPath, name in
         var config =  cell.defaultContentConfiguration()
         config.text = name.structDesc
         cell.contentConfiguration = config
     }
+    let cellreg = UICollectionView.CellRegistration<StructCell, Tree>() { cell, indexPath, item in
+        cell.configure(with: item)
+    }
     
-    private lazy var dataSource = makeDataSource(cellRegistration: cellreg)
+    private lazy var dataSource = makeDataSource(cellRegistration: celldefaultReg)
     private var snapshot = Snapshot()
     
     //MARK: - lifeCycle

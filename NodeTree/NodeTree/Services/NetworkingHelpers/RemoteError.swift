@@ -13,6 +13,7 @@ enum APIErrors: Int, Error {
     case unAuthorized = 401
     case tooManyRequests = 429
     case serverError = 500
+    case requestBuilderFailed
     
     var errorDescription: String? {
         switch self {
@@ -20,6 +21,8 @@ enum APIErrors: Int, Error {
             return "You made too many requests within a window of time and have been rate limited. Back off for a while."
         case .serverError:
             return "Server error."
+        case .requestBuilderFailed:
+            return "request Failed"
         default:
             return "Something goes wrong."
         }

@@ -8,15 +8,24 @@
 import Foundation
 
 
-protocol EndpointProtocol {
-    var baseURL: String { get }
-    
-    var absoluteURL: String { get }
-    
-    var params: [String: String] { get }
-    
-    var headers: [String: String] { get }
+enum HTTPMethod: String {
+    case post = "POST"
+    case put = "PUT"
+    case get = "GET"
+    case delete = "DELETE"
+    case patch = "PATCH"
 }
 
+enum RequestParams {
+    case body(_: Encodable)
+    case url(_: [String: Any]?)
+    case path(_: [String: Any]?)
+}
 
-
+protocol APIRequest {
+    var baseURL: URL { get }
+    var path: EndPoint { get }
+    var method: HTTPMethod { get }
+    var parameters: RequestParams? { get }
+    var headers: [String: Any]? { get }
+}

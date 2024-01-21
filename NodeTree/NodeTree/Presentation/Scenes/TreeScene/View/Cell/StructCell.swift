@@ -12,26 +12,31 @@ class StructCell: UICollectionViewCell {
     @IBOutlet weak var structNameLabel: UILabel!
     @IBOutlet weak var expandImageView: UIImageView!
     
+    let nameLabel: UILabel = {
+        var label = UILabel()
+        label.backgroundColor = .orange
+        label.textColor = .black
+        label.textAlignment = .left
+        
+        return label
+    }()
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        contentView.addSubview(nameLabel)
+        nameLabel.anchor(top: contentView.topAnchor,
+                         leading: contentView.leadingAnchor,
+                         bottom: contentView.bottomAnchor,
+                         trailing: contentView.trailingAnchor)
         contentView.backgroundColor = .green
 
     }
 
     func configure(with tree: Tree) {
         print(tree, "++")
-        structNameLabel.text = tree.structDesc
+        nameLabel.text = tree.structDesc
     }
 }
 
-extension StructCell {
-    typealias CellRegistration = UICollectionView.CellRegistration<StructCell, Tree>
-
-    static func registration() -> CellRegistration {
-        CellRegistration { cell, _, tree in
-            cell.configure(with: tree)
-        }
-    }
-}

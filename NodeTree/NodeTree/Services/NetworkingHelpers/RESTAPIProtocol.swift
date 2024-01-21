@@ -11,42 +11,36 @@ import Combine
 
 
 
-class APIProvider<Endpoint: EndpointProtocol> {
-    func getData(from endpoint: Endpoint) -> AnyPublisher<Data, Error> {
-        guard let request = performRequest(for: endpoint) else {
-            return Fail(error: RemoteError.invalidURL)
+class APIProvider {
+    
+    func getData<T: APIRequest>(from request: T) -> AnyPublisher<Data, Error> {
+
+        do {
+            let request = try buildURLRequest(for: request)
+
+            return loadData(with: request)
                 .eraseToAnyPublisher()
+        } catch {
+            
+            return Fail(error: RemoteError.invalidURL)
+                            .eraseToAnyPublisher()
         }
+    
         
-        return loadData(with: request)
-            .eraseToAnyPublisher()
     }
     
-    // MARK: - Request building
-    private func performRequest(for endpoint: Endpoint) -> URLRequest? {
-        guard var urlComponents = URLComponents(string: endpoint.absoluteURL) else {
-            return nil
-        }
-
-        urlComponents.queryItems = endpoint.params.compactMap({ param -> URLQueryItem in
-            return URLQueryItem(name: param.key, value: param.value)
-        })
-
-        guard let url = urlComponents.url else {
-            return nil
-        }
-
-        var urlRequest = URLRequest(url: url,
-                                    cachePolicy: .reloadRevalidatingCacheData,
-                                    timeoutInterval: 30)
-        
-        endpoint.headers.forEach { urlRequest.setValue($0.value, forHTTPHeaderField: $0.key) }
-        
-        return urlRequest
+    func buildURLRequest<T: APIRequest>(for request: T) throws -> URLRequest {
+      return try URLRequestBuilder(with: request.baseURL, path: request.path)
+          .set(method: request.method)
+          .set(headers: request.headers)
+          .set(parameters: request.parameters)
+          .build()
     }
+
     
     // MARK: - Getting data
     private func loadData(with request: URLRequest) -> AnyPublisher<Data, Error> {
+
         return URLSession.shared.dataTaskPublisher(for: request)
             .mapError({ error -> Error in
                 APIErrors(rawValue: error.code.rawValue) ?? RemoteError.unknownError
@@ -59,4 +53,9 @@ class APIProvider<Endpoint: EndpointProtocol> {
             }, receiveCompletion: nil, receiveCancel: nil, receiveRequest: nil)
             .eraseToAnyPublisher()
     }
+    
+
+    
+
 }
+

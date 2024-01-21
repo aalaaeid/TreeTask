@@ -24,17 +24,24 @@ protocol DefaultTreeRepository {
 
 struct TreeRepository: DefaultTreeRepository {
     
-    private let apiProvider = APIProvider<TreeEndPoint>()
+    private let apiProvider = APIProvider()
     
     func fetchTree() -> AnyPublisher<Data, Error> {
-        apiProvider
-            .getData(from: .getRoot)
+        let request = URLRequestBuilder(path: .getRoot)
+            .set(method: .get)
+        
+       return apiProvider
+            .getData(from: request)
             .eraseToAnyPublisher()
     }
     
     func fetchChilds(treeID: String) -> AnyPublisher<Data, Error> {
-        apiProvider
-            .getData(from: .getChildren(treeID: treeID))
+        let request = URLRequestBuilder(path: .getChilds)
+            .set(method: .get)
+            .set(parameters: .path(["structID" : treeID]))
+        
+        return apiProvider
+            .getData(from: request)
             .eraseToAnyPublisher()
     }
     
