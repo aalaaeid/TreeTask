@@ -15,7 +15,8 @@ struct Tree: Codable, Hashable {
         lhs.structID == rhs.structID
     }
     
-    let structDesc, childnodecount: String
+    let structDesc: String
+    let childnodecount: Int
     let structID: String
 
     enum CodingKeys: String, CodingKey {

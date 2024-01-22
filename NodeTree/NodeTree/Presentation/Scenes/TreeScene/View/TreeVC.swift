@@ -52,12 +52,17 @@ class TreeVC: UIViewController {
         bindViewModel()
         
          cellreg = UICollectionView.CellRegistration<StructCell, Tree>() { cell, indexPath, item in
-           cell.configure(with: item)
            
-             let section = self.dataSource.snapshot()
-            let isExpanded = self.expandedSections.contains(item)
+             let isExpanded = self.snapshot.isExpanded(item)
+             
+             cell.configure(with: "\(isExpanded)")
+           
 
              cell.configure(with: isExpanded)
+             
+             let childLevel = self.snapshot.level(of: item)
+             cell.set(indentationConstraint: CGFloat(20 * childLevel))
+
 
        }
     }
@@ -160,7 +165,7 @@ extension TreeVC {
     func applyChildsSnapshot(with childs: [Tree], parent: Tree, animatingDifferences: Bool = true) {
 
         snapshot.append(childs, to: parent)
-        if parent.childnodecount != "0" {
+        if parent.childnodecount != 0 {
             snapshot.expand([parent])
         }
         dataSource.apply(snapshot, to: .main, animatingDifferences: animatingDifferences)
@@ -169,7 +174,7 @@ extension TreeVC {
     func expandSnapshotFor(parent: Tree, animatingDifferences: Bool = true) {
        
         
-        if parent.childnodecount != "0" {
+        if parent.childnodecount != 0 {
             if snapshot.isExpanded(parent) {
                 snapshot.collapse([parent])
                 expandedSections.remove(parent)
@@ -194,6 +199,7 @@ extension TreeVC {
         return hasChildren
 
     }
+
     
     
 }
