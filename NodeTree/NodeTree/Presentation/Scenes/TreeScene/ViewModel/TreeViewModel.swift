@@ -9,11 +9,25 @@ import Foundation
 import Combine
 
 
+protocol TreeViewModelProtocol {
+    func fetchRoot()
+    func fetchNodeOf(parent: Tree)
+}
+
 
 extension TreeVC {
     class ViewModel {
         
-        private var treeRepository = RemoteTreeRepository.init()
+        private let treeUseCase: TreeUseCaseProtocol
+        private let childUseCase: ChildUseCaseProtocol
+        
+        init(treeUseCase: TreeUseCaseProtocol,
+             childUseCase: ChildUseCaseProtocol) {
+            
+            self.treeUseCase = treeUseCase
+            self.childUseCase = childUseCase
+        }
+        
         var bag: Set<AnyCancellable> = []
         var fetchTreeSuccess: PassthroughSubject<[Tree], Never> = .init()
         var fetchChildsSuccess: PassthroughSubject<(Root: Tree, childs: [Tree]), Never> = .init()
@@ -23,11 +37,13 @@ extension TreeVC {
     
 }
 
-extension TreeVC.ViewModel: TreeViewModelUseCase {
+
+
+extension TreeVC.ViewModel: TreeViewModelProtocol {
     
     func fetchRoot() {
         
-        treeRepository.fetchTree()
+        treeUseCase.fetchTree()
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: {  completion in
@@ -55,7 +71,7 @@ extension TreeVC.ViewModel: TreeViewModelUseCase {
     
     func fetchNodeOf(parent: Tree) {
         
-        treeRepository.fetchChilds(treeID: parent.structID)
+        childUseCase.fetchChilds(treeID: parent.structID)
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: {  completion in

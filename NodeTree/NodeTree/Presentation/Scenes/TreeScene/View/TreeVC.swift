@@ -18,7 +18,7 @@ class TreeVC: UIViewController {
     
     // MARK: -
 
-    var viewModel = TreeVC.ViewModel()
+    var viewModel: TreeVC.ViewModel?
     private var bag: Set<AnyCancellable> = []
     
     @IBOutlet weak var treeCollectionView: UICollectionView!
@@ -43,9 +43,11 @@ class TreeVC: UIViewController {
 
         setupCollectionView()
 
-        viewModel.fetchRoot()
+       
  
         bindViewModel()
+        
+        viewModel?.fetchRoot()
         
          cellreg = UICollectionView.CellRegistration<StructCell, Tree>() { cell, indexPath, item in
 
@@ -70,7 +72,10 @@ class TreeVC: UIViewController {
     
     //MARK: - viewSetup
     func bindViewModel() {
-        viewModel
+        viewModel = ViewModel(treeUseCase: TreeUseCase(treeRepo: RemoteTreeRepository()),
+                  childUseCase: ChildUseCase(treeRepo: RemoteTreeRepository()))
+        
+        viewModel?
             .fetchTreeSuccess
             .receive(on: RunLoop.main)
             .sink { [weak self] tree in
@@ -78,7 +83,7 @@ class TreeVC: UIViewController {
                 applyRootSnapshot(with: tree)
             }.store(in: &bag)
         
-        viewModel
+        viewModel?
             .fetchChildsSuccess
             .receive(on: RunLoop.main)
             .sink { [weak self] (root: Tree, childs: [Tree]) in
@@ -87,7 +92,7 @@ class TreeVC: UIViewController {
 
             }.store(in: &bag)
         
-        viewModel
+        viewModel?
             .reloadChildSuccess
             .receive(on: RunLoop.main)
             .sink { [weak self] parent in
@@ -114,11 +119,11 @@ extension TreeVC: UICollectionViewDelegate {
         
         if !selectedSnapshotHasChilds(indexPath: indexPath) {
             
-            viewModel.fetchNodeOf(parent: snapOFIndex)
+            viewModel?.fetchNodeOf(parent: snapOFIndex)
             
         } else {
             
-            viewModel.reloadNodeOf(parent: snapOFIndex)
+            viewModel?.reloadNodeOf(parent: snapOFIndex)
         }
     
     }

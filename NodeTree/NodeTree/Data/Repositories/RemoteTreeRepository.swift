@@ -8,8 +8,17 @@
 import Foundation
 import Combine
 
+protocol RemoteTreeRepositoryProtocol {
+    /// Fetch Root Tree
+    func fetchTree() -> AnyPublisher<[Tree], Error>
+    /// Fetch all Childs of tree ID
+    /// - Parameter treeID: ID of a given tree
+    func fetchChilds(treeID: String) -> AnyPublisher<[Tree], Error>
+ 
 
-struct RemoteTreeRepository: FetchTreeUseCase {
+}
+
+struct RemoteTreeRepository: RemoteTreeRepositoryProtocol {
     
     private let apiProvider = APIProvider()
     
