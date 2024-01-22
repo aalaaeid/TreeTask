@@ -43,8 +43,7 @@ extension TreeVC.ViewModel: TreeViewModelUseCase {
                 },
                 receiveValue: { [weak self] response in
                     print(response, "👻")
-                    self?.fetchTreeSuccess.send(response)
-                    
+                    self?.fetchTreeSuccess.send(response)                    
                 }
             )
             .store(in: &bag)

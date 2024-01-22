@@ -28,11 +28,7 @@ class TreeVC: UIViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Tree>
     private typealias Snapshot = NSDiffableDataSourceSectionSnapshot<Tree>
     
-//    let celldefaultReg = UICollectionView.CellRegistration<UICollectionViewListCell, Tree>() { cell, indexPath, name in
-//        var config =  cell.defaultContentConfiguration()
-//        config.text = name.structDesc
-//        cell.contentConfiguration = config
-//    }
+
     private var snapshot = Snapshot()
 
     var cellreg = UICollectionView.CellRegistration<StructCell, Tree> { cell, indexPath, itemIdentifier in}
@@ -52,13 +48,13 @@ class TreeVC: UIViewController {
         bindViewModel()
         
          cellreg = UICollectionView.CellRegistration<StructCell, Tree>() { cell, indexPath, item in
-           
-             let isExpanded = self.snapshot.isExpanded(item)
-             
-             cell.configure(with: "\(isExpanded)")
-           
 
-             cell.configure(with: isExpanded)
+             let isExpanded =  self.expandedSections.contains(item)
+
+             cell.configure(with: item)
+           
+             let hasChilds = (item.childnodecount != 0)
+             cell.configureRoot(hasChilds: hasChilds, isExpanded: isExpanded)
              
              let childLevel = self.snapshot.level(of: item)
              cell.set(indentationConstraint: CGFloat(20 * childLevel))
@@ -124,8 +120,7 @@ extension TreeVC: UICollectionViewDelegate {
             
             viewModel.reloadNodeOf(parent: snapOFIndex)
         }
-        
-        
+    
     }
     
 
@@ -163,17 +158,22 @@ extension TreeVC {
     
     
     func applyChildsSnapshot(with childs: [Tree], parent: Tree, animatingDifferences: Bool = true) {
+        let index = dataSource.indexPath(for: parent) ?? IndexPath()
 
         snapshot.append(childs, to: parent)
         if parent.childnodecount != 0 {
             snapshot.expand([parent])
+            expandedSections.insert(parent)
         }
+
+        treeCollectionView.reloadData()
         dataSource.apply(snapshot, to: .main, animatingDifferences: animatingDifferences)
     }
     
     func expandSnapshotFor(parent: Tree, animatingDifferences: Bool = true) {
+        let index = dataSource.indexPath(for: parent) ?? IndexPath()
+
        
-        
         if parent.childnodecount != 0 {
             if snapshot.isExpanded(parent) {
                 snapshot.collapse([parent])
@@ -184,8 +184,8 @@ extension TreeVC {
                 expandedSections.insert(parent)
 
             }
-            
         }
+        treeCollectionView.reloadData()
         dataSource.apply(snapshot, to: .main, animatingDifferences: animatingDifferences)
     }
 

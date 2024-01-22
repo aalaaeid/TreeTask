@@ -39,9 +39,9 @@ class StructCell: UICollectionViewCell {
     }()
     
     let chevronRight = UIImage(systemName: "chevron.right",
-                               withConfiguration: UIImage.SymbolConfiguration(scale: .small))
+                               withConfiguration: UIImage.SymbolConfiguration(weight: .regular))
     let chevronDown = UIImage(systemName: "chevron.down",
-                              withConfiguration: UIImage.SymbolConfiguration(scale: .small))
+                              withConfiguration: UIImage.SymbolConfiguration(weight: .regular))
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,7 +64,7 @@ class StructCell: UICollectionViewCell {
                          leading: contentView.leadingAnchor,
                          bottom: contentView.bottomAnchor,
                          trailing: contentView.trailingAnchor)
-        revealImageView.constrainWidth(constant: 25)
+        revealImageView.constrainWidth(constant: 30)
         contentStackView.addArrangedSubviews([nameLabel, revealImageView])
     }
     
@@ -73,13 +73,14 @@ class StructCell: UICollectionViewCell {
                                                       bottom: 0, right: 0)
     }
 
-    func configure(with tree: String) {
-        nameLabel.text = tree//tree.structDesc
+    func configure(with tree: Tree) {
+        nameLabel.text = tree.structDesc
     }
     
-    func configure(with isExpanded: Bool) {
+    func configureRoot(hasChilds: Bool,  isExpanded: Bool) {
 
-        revealImageView.image = isExpanded ? chevronDown : chevronRight
+        revealImageView.image = isExpanded ? chevronRight : chevronDown
+        revealImageView.isHidden = hasChilds ? false : true
     }
 }
 
