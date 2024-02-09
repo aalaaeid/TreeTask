@@ -43,7 +43,6 @@
 		F1EBDD4E2B44019B0091E0D5 /* EndPointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD4D2B44019B0091E0D5 /* EndPointProtocol.swift */; };
 		F1EBDD512B4401E90091E0D5 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD502B4401E90091E0D5 /* URLRequestBuilder.swift */; };
 		F1EBDD532B440A4A0091E0D5 /* RemoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD522B440A4A0091E0D5 /* RemoteResponse.swift */; };
-		F1EBDD562B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EBDD552B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +103,6 @@
 		F1EBDD4D2B44019B0091E0D5 /* EndPointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointProtocol.swift; sourceTree = "<group>"; };
 		F1EBDD502B4401E90091E0D5 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		F1EBDD522B440A4A0091E0D5 /* RemoteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteResponse.swift; sourceTree = "<group>"; };
-		F1EBDD552B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Connectivity.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,7 +371,6 @@
 		F1EBDD542B4416B30091E0D5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				F1EBDD552B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift */,
 				F16C8A222B5C1F0400FA8F96 /* UIView+Constraint.swift */,
 			);
 			path = Extension;
@@ -531,7 +528,6 @@
 				F1E457912B3C5915006C50AF /* SceneDelegate.swift in Sources */,
 				F16C8A232B5C1F0400FA8F96 /* UIView+Constraint.swift in Sources */,
 				F10DD2702B3D84C90065FDCF /* RemoteTreeRepository.swift in Sources */,
-				F1EBDD562B4416F50091E0D5 /* NWPathMonitor+Connectivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
