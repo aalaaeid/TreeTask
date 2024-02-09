@@ -8,14 +8,21 @@
 import Foundation
 
 class URLRequestBuilder: APIRequest {
-    var baseURL: URL
+    
+    var baseURL: URL {
+        guard let url = URL(string: "http://localhost:3000/") else {
+            fatalError("Invalid base URL")
+        }
+        return url
+    }
     var path: EndPoint
     var method: HTTPMethod = .get
     var headers: [String: Any]?
     var parameters: RequestParams?
+    private var fileData: Data?
+    private var fileName: String?
     
-    init(with baseURL: URL = URL(string: "http://localhost:3000/")!, path: EndPoint) {
-        self.baseURL = baseURL
+    init(path: EndPoint) {
         self.path = path
     }
     
@@ -39,6 +46,19 @@ class URLRequestBuilder: APIRequest {
         return self
     }
     
+    @discardableResult
+    func setFileData(_ fileData: Data) -> Self {
+        self.fileData = fileData
+        return self
+    }
+    
+    @discardableResult
+    func setFileName(_ fileName: String) -> Self {
+        self.fileName = fileName
+        return self
+    }
+    
+    
 
     func build() -> URLRequest {
         
@@ -55,6 +75,32 @@ class URLRequestBuilder: APIRequest {
                 if case let RequestParams.body(param) = parameters  {
                     urlRequest.httpBody = try? JSONEncoder().encode(param)
 
+                } else if case let RequestParams.multipart(param) = parameters {
+                    let boundary = "Boundary-\(UUID().uuidString)"
+                    urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+                    
+                    var body = [UInt8]()
+                    
+                    // Append parameters
+                    for (key, value) in param {
+                        body += "--\(boundary)\r\n".utf8
+                        body += "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".utf8
+                        body += "\(value)\r\n".utf8
+                    }
+                    
+                    // Append file data
+                    if let fileData = fileData, let fileName = fileName {
+                        body += "--\(boundary)\r\n".utf8
+                        body += "Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n".utf8
+                        body += "Content-Type: application/octet-stream\r\n\r\n".utf8
+                        body += fileData
+                        body += "\r\n".utf8
+                    }
+                    
+                    // Closing boundary
+                    body += "--\(boundary)--\r\n".utf8
+                    
+                    urlRequest.httpBody = Data(bytes: body)
                 } else {
                     if let requestURL = buildRequestParams(with: path.rawValue,
                                                                     parameters: parameters) {
@@ -93,6 +139,9 @@ class URLRequestBuilder: APIRequest {
             let parameterString = parameter?.map { "\($0.key)=\($0.value)" }.joined(separator: "&") ?? ""
             let fullPath = "\(path)/\(parameterString)"
             return URL(string: fullPath, relativeTo: baseURL)
+            
+        case .multipart(_):
+            return nil
         }
     
     }

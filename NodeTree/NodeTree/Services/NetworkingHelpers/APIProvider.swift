@@ -6,29 +6,14 @@
 import Foundation
 import Combine
 
+protocol APIProviderProtocol {
+    func getData<U: Decodable>(from request: URLRequest) -> AnyPublisher<U, Error>
+}
 
 
-class APIProvider {
+class APIProvider: APIProviderProtocol {
     
     func getData<U: Decodable>(from request: URLRequest) -> AnyPublisher<U, Error> {
-
-        do {
-            
-            return loadData(with: request)
-                .eraseToAnyPublisher()
-        } catch {
-            
-            return Fail(error: RemoteError.invalidURL)
-                            .eraseToAnyPublisher()
-        }
-    
-        
-    }
-    
-
-    
-    // MARK: - Getting data
-    private func loadData<U: Decodable>(with request: URLRequest) -> AnyPublisher<U, Error> {
 
         return URLSession.shared.dataTaskPublisher(for: request)
             .mapError({ error -> Error in
@@ -43,10 +28,9 @@ class APIProvider {
             .decode(type: U.self, decoder: JSONDecoder())
             .mapError { $0 as Error }
             .eraseToAnyPublisher()
+        
     }
-    
 
-    
 
 }
 

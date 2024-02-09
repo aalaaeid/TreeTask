@@ -36,6 +36,8 @@ class TreeVC: UIViewController {
     
     var expandedSections: Set<Tree> = []
 
+
+
     //MARK: - lifeCycle
 
     override func viewDidLoad() {
@@ -63,17 +65,17 @@ class TreeVC: UIViewController {
 
 
        }
-    }
-    
+        
 
+    }
 
 
     
     
     //MARK: - viewSetup
     func bindViewModel() {
-        viewModel = ViewModel(treeUseCase: TreeUseCase(treeRepo: RemoteTreeRepository()),
-                  childUseCase: ChildUseCase(treeRepo: RemoteTreeRepository()))
+        viewModel = ViewModel(treeUseCase: TreeUseCase(treeRepo: RemoteTreeRepository(apiProvider: APIProvider())),
+                              childUseCase: ChildUseCase(treeRepo: RemoteTreeRepository(apiProvider: APIProvider())))
         
         viewModel?
             .fetchTreeSuccess
@@ -176,8 +178,6 @@ extension TreeVC {
     }
     
     func expandSnapshotFor(parent: Tree, animatingDifferences: Bool = true) {
-        let index = dataSource.indexPath(for: parent) ?? IndexPath()
-
        
         if parent.childnodecount != 0 {
             if snapshot.isExpanded(parent) {

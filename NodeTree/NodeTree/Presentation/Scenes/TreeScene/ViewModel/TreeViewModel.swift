@@ -48,6 +48,7 @@ extension TreeVC.ViewModel: TreeViewModelProtocol {
             .sink(
                 receiveCompletion: {  completion in
                     
+                    
                     switch completion {
                         
                     case .finished:
@@ -59,7 +60,7 @@ extension TreeVC.ViewModel: TreeViewModelProtocol {
                 },
                 receiveValue: { [weak self] response in
                     print(response, "👻")
-                    self?.fetchTreeSuccess.send(response)                    
+                    self?.fetchTreeSuccess.send(response)
                 }
             )
             .store(in: &bag)

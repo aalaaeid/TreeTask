@@ -20,7 +20,11 @@ protocol RemoteTreeRepositoryProtocol {
 
 struct RemoteTreeRepository: RemoteTreeRepositoryProtocol {
     
-    private let apiProvider = APIProvider()
+    private let apiProvider: APIProviderProtocol
+    
+    init(apiProvider: APIProviderProtocol) {
+        self.apiProvider = apiProvider
+    }
     
     func fetchTree() -> AnyPublisher<[Tree], Error> {
         let request = URLRequestBuilder(path: .getRoot)

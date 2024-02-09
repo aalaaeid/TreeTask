@@ -20,6 +20,7 @@ enum RequestParams {
     case body(_: Encodable)
     case url(_: [String: Any]?)
     case path(_: [String: Any]?)
+    case multipart(_: [String: Any])
 }
 
 protocol APIRequest {

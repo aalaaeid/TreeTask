@@ -1,0 +1,18 @@
+
+[
+    {
+        "STRUCT_DESC": "parent1",
+        "CHILDNODECOUNT": 5,
+        "STRUCT_ID": "7i7n6NmWyDw"
+    },
+    {
+        "STRUCT_DESC": "parent2",
+        "CHILDNODECOUNT": 0,
+        "STRUCT_ID": "7i7n6NmWyDw2"
+    },
+    {
+        "STRUCT_DESC": "parent3",
+        "CHILDNODECOUNT": 0,
+        "STRUCT_ID": "7i7n6NmWyDwt"
+    }
+]

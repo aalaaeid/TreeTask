@@ -15,10 +15,21 @@
 		F10DD27A2B3D8B460065FDCF /* RemoteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DD2792B3D8B460065FDCF /* RemoteError.swift */; };
 		F131EDFE2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */; };
 		F131EDFF2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */; };
+		F132CB222B6D9A3C00CB0CB7 /* TreeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F132CB212B6D9A3C00CB0CB7 /* TreeUseCaseTests.swift */; };
+		F132CB242B6D9A5000CB0CB7 /* ChildUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F132CB232B6D9A5000CB0CB7 /* ChildUseCaseTests.swift */; };
+		F16810112B758C7300912EC8 /* MockRemoteTreeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16810102B758C7300912EC8 /* MockRemoteTreeRepository.swift */; };
+		F16810132B758D4A00912EC8 /* TreeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16810122B758D4A00912EC8 /* TreeViewModelTests.swift */; };
+		F16810152B759F5B00912EC8 /* MockAPIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16810142B759F5B00912EC8 /* MockAPIProvider.swift */; };
 		F16C8A232B5C1F0400FA8F96 /* UIView+Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16C8A222B5C1F0400FA8F96 /* UIView+Constraint.swift */; };
 		F16C8A292B5C753400FA8F96 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16C8A282B5C753400FA8F96 /* EndPoints.swift */; };
 		F19F0B6D2B595461003F829E /* StructCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F0B6B2B595461003F829E /* StructCell.swift */; };
 		F19F0B6E2B595461003F829E /* StructCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F19F0B6C2B595461003F829E /* StructCell.xib */; };
+		F1B2FE812B760B3600BEB65A /* TreeRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B2FE802B760B3600BEB65A /* TreeRepositoryTests.swift */; };
+		F1B2FE832B7610C500BEB65A /* TreeData.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B2FE822B7610C500BEB65A /* TreeData.json */; };
+		F1B2FE852B7610F400BEB65A /* childsData.json in Resources */ = {isa = PBXBuildFile; fileRef = F1B2FE842B7610F400BEB65A /* childsData.json */; };
+		F1B2FE872B76136300BEB65A /* URLRequestBuilderMocking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B2FE862B76136300BEB65A /* URLRequestBuilderMocking.swift */; };
+		F1B2FE892B76139500BEB65A /* MockTreeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B2FE882B76139500BEB65A /* MockTreeUseCase.swift */; };
+		F1B2FE8B2B76142100BEB65A /* MockChildUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B2FE8A2B76142100BEB65A /* MockChildUseCase.swift */; };
 		F1B566BC2B5D78B1008A6D15 /* TreeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B566BB2B5D78B1008A6D15 /* TreeUseCase.swift */; };
 		F1CA29B82B5EDB0900A01B46 /* ChildUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA29B72B5EDB0900A01B46 /* ChildUseCase.swift */; };
 		F1E4578F2B3C5915006C50AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E4578E2B3C5915006C50AF /* AppDelegate.swift */; };
@@ -61,10 +72,21 @@
 		F10DD2792B3D8B460065FDCF /* RemoteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteError.swift; sourceTree = "<group>"; };
 		F131EDFC2B4BE9FF00FCF499 /* NetworkDisconnectedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDisconnectedVC.swift; sourceTree = "<group>"; };
 		F131EDFD2B4BE9FF00FCF499 /* NetworkDisconnectedVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkDisconnectedVC.xib; sourceTree = "<group>"; };
+		F132CB212B6D9A3C00CB0CB7 /* TreeUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeUseCaseTests.swift; sourceTree = "<group>"; };
+		F132CB232B6D9A5000CB0CB7 /* ChildUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildUseCaseTests.swift; sourceTree = "<group>"; };
+		F16810102B758C7300912EC8 /* MockRemoteTreeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRemoteTreeRepository.swift; sourceTree = "<group>"; };
+		F16810122B758D4A00912EC8 /* TreeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeViewModelTests.swift; sourceTree = "<group>"; };
+		F16810142B759F5B00912EC8 /* MockAPIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIProvider.swift; sourceTree = "<group>"; };
 		F16C8A222B5C1F0400FA8F96 /* UIView+Constraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraint.swift"; sourceTree = "<group>"; };
 		F16C8A282B5C753400FA8F96 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		F19F0B6B2B595461003F829E /* StructCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructCell.swift; sourceTree = "<group>"; };
 		F19F0B6C2B595461003F829E /* StructCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StructCell.xib; sourceTree = "<group>"; };
+		F1B2FE802B760B3600BEB65A /* TreeRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeRepositoryTests.swift; sourceTree = "<group>"; };
+		F1B2FE822B7610C500BEB65A /* TreeData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TreeData.json; sourceTree = "<group>"; };
+		F1B2FE842B7610F400BEB65A /* childsData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = childsData.json; sourceTree = "<group>"; };
+		F1B2FE862B76136300BEB65A /* URLRequestBuilderMocking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilderMocking.swift; sourceTree = "<group>"; };
+		F1B2FE882B76139500BEB65A /* MockTreeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTreeUseCase.swift; sourceTree = "<group>"; };
+		F1B2FE8A2B76142100BEB65A /* MockChildUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChildUseCase.swift; sourceTree = "<group>"; };
 		F1B566BB2B5D78B1008A6D15 /* TreeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeUseCase.swift; sourceTree = "<group>"; };
 		F1CA29B72B5EDB0900A01B46 /* ChildUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildUseCase.swift; sourceTree = "<group>"; };
 		F1E4578B2B3C5915006C50AF /* NodeTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +205,44 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		F132CB1D2B6D99E000CB0CB7 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F132CB212B6D9A3C00CB0CB7 /* TreeUseCaseTests.swift */,
+				F132CB232B6D9A5000CB0CB7 /* ChildUseCaseTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		F132CB1F2B6D9A0100CB0CB7 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				F16810142B759F5B00912EC8 /* MockAPIProvider.swift */,
+				F16810102B758C7300912EC8 /* MockRemoteTreeRepository.swift */,
+				F1B2FE862B76136300BEB65A /* URLRequestBuilderMocking.swift */,
+				F1B2FE882B76139500BEB65A /* MockTreeUseCase.swift */,
+				F1B2FE8A2B76142100BEB65A /* MockChildUseCase.swift */,
+			);
+			name = Mocks;
+			sourceTree = "<group>";
+		};
+		F132CB202B6D9A0900CB0CB7 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				F1B2FE822B7610C500BEB65A /* TreeData.json */,
+				F1B2FE842B7610F400BEB65A /* childsData.json */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
+		F168100F2B75865700912EC8 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				F16810122B758D4A00912EC8 /* TreeViewModelTests.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		F19F0B6A2B594D01003F829E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +250,14 @@
 				F19F0B6C2B595461003F829E /* StructCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		F1B2FE7F2B760B2300BEB65A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F1B2FE802B760B3600BEB65A /* TreeRepositoryTests.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		F1B566BA2B5D78A3008A6D15 /* Domain */ = {
@@ -237,6 +305,11 @@
 		F1E457A42B3C5916006C50AF /* NodeTreeTests */ = {
 			isa = PBXGroup;
 			children = (
+				F1B2FE7F2B760B2300BEB65A /* Data */,
+				F168100F2B75865700912EC8 /* Presentation */,
+				F132CB202B6D9A0900CB0CB7 /* Stubs */,
+				F132CB1F2B6D9A0100CB0CB7 /* Mocks */,
+				F132CB1D2B6D99E000CB0CB7 /* Domain */,
 				F1E457A52B3C5916006C50AF /* NodeTreeTests.swift */,
 			);
 			path = NodeTreeTests;
@@ -422,6 +495,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1B2FE852B7610F400BEB65A /* childsData.json in Resources */,
+				F1B2FE832B7610C500BEB65A /* TreeData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +539,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1B2FE8B2B76142100BEB65A /* MockChildUseCase.swift in Sources */,
+				F132CB222B6D9A3C00CB0CB7 /* TreeUseCaseTests.swift in Sources */,
+				F132CB242B6D9A5000CB0CB7 /* ChildUseCaseTests.swift in Sources */,
 				F1E457A62B3C5916006C50AF /* NodeTreeTests.swift in Sources */,
+				F16810132B758D4A00912EC8 /* TreeViewModelTests.swift in Sources */,
+				F1B2FE872B76136300BEB65A /* URLRequestBuilderMocking.swift in Sources */,
+				F16810112B758C7300912EC8 /* MockRemoteTreeRepository.swift in Sources */,
+				F16810152B759F5B00912EC8 /* MockAPIProvider.swift in Sources */,
+				F1B2FE812B760B3600BEB65A /* TreeRepositoryTests.swift in Sources */,
+				F1B2FE892B76139500BEB65A /* MockTreeUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

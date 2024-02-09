@@ -15,10 +15,10 @@ protocol ChildUseCaseProtocol {
 
 class ChildUseCase: ChildUseCaseProtocol {
     
-    private let treeRepo: RemoteTreeRepository
+    private let treeRepo: RemoteTreeRepositoryProtocol
     
     
-    init(treeRepo: RemoteTreeRepository){
+    init(treeRepo: RemoteTreeRepositoryProtocol){
         self.treeRepo = treeRepo
     }
         

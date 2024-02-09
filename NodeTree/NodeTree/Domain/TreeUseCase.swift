@@ -17,10 +17,10 @@ protocol TreeUseCaseProtocol {
 
 class TreeUseCase: TreeUseCaseProtocol {
     
-    private let treeRepo: RemoteTreeRepository
+    private let treeRepo: RemoteTreeRepositoryProtocol
     
     
-    init(treeRepo: RemoteTreeRepository){
+    init(treeRepo: RemoteTreeRepositoryProtocol){
         self.treeRepo = treeRepo
     }
         
